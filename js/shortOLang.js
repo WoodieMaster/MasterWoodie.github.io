@@ -117,8 +117,8 @@ const operators = {
     '\'': () => {
         let value = popFromStack();
 
-        if(typeof value === "number") stack.push(value);
-        else stack.push(String.fromCharCode(value))
+        if(typeof value === "string") stack.push(value);
+        else stack.push(String.fromCharCode(Math.abs(value)))
     },
     ',': () => {outputElement.value += popFromStack()},
     '!': () => {stack.push(+!popFromStack())},
@@ -180,6 +180,9 @@ const operators = {
     },
     '_': () => {
        setInput(2);
+    },
+    ':': () => {
+        setInput(3);
     },
     'D': () => {
         let amount = popFromStack();
@@ -639,13 +642,6 @@ document.addEventListener("keydown", e => {
                 stack.push(key);
                 setInput(0);
                 requestAnimationFrame(runCode);
-                return; 
-            }
-
-            if(key === "\n") {
-                stack.push(outputElement.value.substring(outputElement.value.length-inputLength, outputElement.value.length));
-                setInput(0);
-                requestAnimationFrame(runCode);
                 return;
             }
 
@@ -657,8 +653,32 @@ document.addEventListener("keydown", e => {
                 return;
             }
 
-            inputLength++;
-            outputElement.value += key;
+            if(waitForInput === 2) {
+                if(key === "\n") {
+                    stack.push(outputElement.value.substring(outputElement.value.length-inputLength, outputElement.value.length));
+                    setInput(0);
+                    requestAnimationFrame(runCode);
+                    return;
+                }
+    
+                inputLength++;
+                outputElement.value += key;
+
+                return;
+            }
+
+            if(key === "\n") {
+                stack.push(parseFloat(outputElement.value.substring(outputElement.value.length-inputLength, outputElement.value.length)));
+                setInput(0);
+                requestAnimationFrame(runCode);
+                return;
+            }
+
+            if(isDigit(key) || (key === '-' && inputLength === 0) || (key === '.' && !outputElement.value.substring(outputElement.value.length-inputLength, outputElement.value.length).includes('.'))) {
+                inputLength++;
+                outputElement.value += key;
+                return;
+            }
         }
         
     }
