@@ -9,8 +9,8 @@
         {"content": "weirdLang.html", "text": "Weird Lang (incomplete)"},
         {"content": "shortOLang.html", "text": "Short O"}
     ]},
-    {"type":"dropdown", "text":"Other Stuff", "content"}: [
+    {"type":"dropdown", "text":"Other Stuff", "content": [
         {"content": "todoList.html", "text": "Todo List"},
         {"content": "goofHotel.html", "text":"Goof Hotel"}
-    ]
+    ]}
 ]
