@@ -1,16 +1,16 @@
 [
-    {"type": "link", "content": "index.html", "text":"Home"},
+    {"type": "link", "content": "./", "text":"Home"},
     {"type":"dropdown", "text":"Games", "content": [
-        {"content": "leapAdventure.html", "text": "Leap Adventure"}
+        {"content": "./leapAdventure", "text": "Leap Adventure"}
     ]},
     {"type":"dropdown", "text":"Interpreters", "content": [
-        {"content": "brainfuck.html", "text": "Brainf*ck"},
-        {"content": "weirdJS.html", "text": "Weird JS"},
-        {"content": "weirdLang.html", "text": "Weird Lang (incomplete)"},
-        {"content": "shortOLang.html", "text": "Short O"}
+        {"content": "./brainfuck", "text": "Brainf*ck"},
+        {"content": "./weirdJS", "text": "Weird JS"},
+        {"content": "./weirdLang", "text": "Weird Lang (incomplete)"},
+        {"content": "./shortOLang.html", "text": "Short O"}
     ]},
     {"type":"dropdown", "text":"Other Stuff", "content": [
-        {"content": "todoList.html", "text": "Todo List"},
-        {"content": "goofHotel.html", "text":"Goof Hotel"}
+        {"content": "./todoList", "text": "Todo List"},
+        {"content": "./goofHotel", "text":"Goof Hotel"}
     ]}
 ]
