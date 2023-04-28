@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainfuck | Wood Games</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/interpreter.css">
+    <link rel="icon" href="IMG/WoodGameLogo.png" type="image/x-icon">
+    <script src="js/weirdLang.js" type="module" defer></script>
+    <script src="js/GENERAL.js" type="module" defer></script>
+</head>
+<body>
+    <h1>Weird Lang cause can du</h1>
+
+    <form id="form">
+        <div class="textarea">
+            <label for="input">Code:</label><br>
+            <textarea class="focusable" name="input" id="input" draggable="false"></textarea>
+        </div>
+
+        <div id="buttons">
+            <button type="button" id="run">Run</button>
+            <button type="button" id="clear">Clear Console</button>
+
+            <div id="file-upload">
+                <p for="code-file">Upload Code</p>
+                <input type="file" id="code-file" accept=".shoo">
+            </div>
+        </div>
+
+        <div class="textarea">
+            <label for="output">Console:</label><br>
+            <textarea class="focusable" name="output" id="output" readonly draggable="false"></textarea>
+        </div>
+    </form>
+
+    <div id="info">
+        <p>
+        </p>
+    </div>
+
+</body>
+</html>

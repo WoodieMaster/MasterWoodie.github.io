@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainfuck | Wood Games</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/interpreter.css">
+    <link rel="icon" href="IMG/WoodGameLogo.png" type="image/x-icon">
+    <script src="js/GENERAL.js" type="module" defer></script>
+    <script src="js/brainfuck.js" type="module" defer></script>
+</head>
+<body>
+    <h1>Brainfuck</h1>
+
+    <form id="form">
+        <div class="textarea">
+            <label for="input">Code:</label><br>
+            <textarea class="focusable" name="input" id="input" draggable="false"></textarea>
+        </div>
+
+        <div id="buttons">
+            <button type="button" id="run">Run</button>
+            <button type="button" id="clear">Clear Console</button>
+
+            <div id="file-upload">
+                <p for="code-file">Upload Code</p>
+                <input type="file" id="code-file" accept=".bf">
+            </div>
+        </div>
+
+        <div class="textarea">
+            <label for="output">Console:</label><br>
+            <textarea class="focusable" name="output" id="output" readonly draggable="false"></textarea>
+        </div>
+    </form>
+
+    <div id="info">
+        <p>Brainfuck is a language that only uses &lt[+-.,]&gt. Other characters are ignored
+            <br>The languages works by initializing a 30,000 Element long array of ascii characters. A pointer stores the current index in that array
+            <br>&ltEsc&gt: stop program
+            <br>'&lt': pointer--
+            <br>'&gt': pointer++
+            <br>'+': increment current value
+            <br>'-': decrement current value
+            <br>'.': print current value as ascii character
+            <br>',': read value into current value
+            <br>'[', ']': loop -> repeats until current value is 0
+        </p>
+    </div>
+
+</body>
+</html>

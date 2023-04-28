@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/leapAdventure.css" type="text/css">
+    <title>TheJump on Woodpage</title>
+    <link rel="icon" type="image/x-icon" href="IMG/Favicon.png">
+    <script src="https://kit.fontawesome.com/d4cb0ebe93.js" crossorigin="anonymous"></script>
+    <script src="js/GENERAL.js" type="module" defer></script>
+    <script src="js/leapAdventure.js" type="module" defer></script>
+</head>
+<body>
+    <br><br><br>
+    <div id="game">
+        <div id="loading-screen"></div>
+        <div id="header">
+            <p id="score"><span id="score-text">Score:</span><br><span id="score-value">0</span></p>
+            <i class="fa-solid fa-pause" id="button-pause"></i>
+        </div>
+        <div id="pause">
+            <p>Pause</p>
+            <button id="button-resume">Resume</button>
+            <button id="button-menu">Back To Menu</button>
+        </div>
+
+        <div id="menu">
+            <div id="menu-tutorial">
+                <button id="button-menu-tutorial">How To</button>
+                <ul id="menu-tutorial-text" class="switch-list" data-switch-idx=0>
+                    <p class="switch-list-counter"></p>
+                    <li>
+                        <img src="IMG/leapAdventure/Tutorial_Control.png" alt="Movement">
+                        <p>move left and right by using <br> 'a' & 'd' or the arrow keys<br>You will jump automatically</p>
+                    </li>
+                    <li>
+                        <img src="IMG/leapAdventure/Tutorial_WallWrap.png" alt="Side-Wall-Wrapping">
+                        <p>the side walls wrap around</p>
+                    </li>
+                    <li>
+                        <img src="IMG/leapAdventure/Tutorial_ScoringSystem.png" alt="Scoring System">
+                        <p>The higher you go the more points you get</p>
+                    </li>
+                    <li>
+                        <img src="IMG/leapAdventure/Tutorial_GameModes.png" alt="Game Mode Selector">
+                        <p>There are different game modes, each of which has its own highscore</p>
+                    </li>
+                    <li>
+                        <img src="IMG/leapAdventure/Platform_Normal.png" alt="Normal Platform">
+                        <p>Normal Platform:<br>does nothing</p>
+                    </li>
+                    <li>
+                        <img src="IMG/leapAdventure/Platform_Boost.png" alt="Booster Platform">
+                        <p>Booster Platform:<br>gives you a super jump</p>
+                    </li>
+                    <li>
+                        <img src="IMG/leapAdventure/Platform_Ghost.png" alt="Ghost Platform">
+                        <p>Ghost Platform:<br>Disappears after one jump</p>
+                    </li>
+                    <li>
+                        <img src="IMG/leapAdventure/Platform_Broken.png" alt="Broken Platform">
+                        <p>Broken Platform:<br>Gets destroyed before the player can jump off</p>
+                    </li>
+                    <li>
+                        <img src="IMG/leapAdventure/Platform_Deadly.png" alt="Deadly Platform">
+                        <p>Deadly Platform:<br>Kills you once you land on it</p>
+                    </li>
+                    <li>
+                        <img src="IMG/leapAdventure/Platform_Surprise.png" alt="Surprise Platform">
+                        <p>Surprise Platform:<br>Changes into a random platform after jumping on it</p>
+                    </li>
+                </ul>
+            </div>
+            <p id="title">Leap Adventure</p>
+            
+            <p id="high-score">High Score:<br><span id="high-score-value">0</span></p>
+            <button id="button-play">Play</button>
+            <div id="game-mode">
+                <label for="GameMode" id="game-mode-text">Game Mode:</label>
+                <input type="list" name="GameMode" id="game-mode-input" data-list-items="test, master" value="test">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

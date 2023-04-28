@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation GoofHotel</title>
+    <link rel="icon" type="image/x-icon" href="IMG/Favicon.png">
+    <script defer type="module" src="js/GENERAL.js"></script>
+    <script defer type="module" src="js/goofHotel.js"></script>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+<body>
+    
+    <header>
+        <h1>Reservation for GoofHotel<sup>TM</sup></h1>
+        <br>
+    </header>
+    
+    <section>
+        <h2>Information</h2>
+        <form>
+            <label for="first-name"><b>First Name:</b></label>
+            <br>
+            <input type="text" name="FirstName" id="first-name" required placeholder="e.g. John">
+            <br>
+    
+            <label for="last-name"><b>Last Name: </b></label>
+            <br>
+            <input type="text" name="LastName" id="last-name" required placeholder="e.g. Doe">
+            <br>
+    
+            <label for="email"><b>Email: </b></label>
+            <br>
+            <input type="email" name="Email" id="email" required placeholder="john.doe@example.org">
+            <br>
+    
+            <label for="arrival-date"><b>Arrival Date: </b></label>
+            <br>
+            <input type="date" name="ArrivalDate" id="arrival-date" required>
+            <br>
+    
+            <label for="night-amount"><b>Nights of stay: </b></label>
+            <br>
+            <input type="number" min="1" name="NightAmount" id="night-amount" required placeholder="e.g. 10">
+            <br>
+    
+            <label for="people-amount"><b>Number of people: </b></label>
+            <br>
+            <input type="number" min="1" max="10" name="PeopleAmount" id="people-amount" required placeholder="e.g. 5">
+            <br>
+    
+            <label for="room-type"><b>Room Type: </b></label>
+            <br>
+            <input type="list" name="RoomType" id="room-type" data-list-items="Small, Normal, Business Room, Suite, VIP Room, King Suite" required value="Normal">
+            <br>
+            <br>
+            <input type="submit" name="Submit" value="Book" id="submit">
+        </form>
+    </section>
+
+    <section>
+        <h2>Reservations</h2>
+        <table id="booking-table">
+            <thead>
+                <th>Name</th>
+                <th>Arrival Date</th>
+                <th>Departure Date</th>
+                <th>People Amount</th>
+                <th>Actions</th>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <button class="input-style-button" id="clear-reservations">Delete All Reservations</button>
+    </section>
+</body>
+</html>
