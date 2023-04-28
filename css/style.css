@@ -775,15 +775,15 @@ DROPDOWN
 }
 
 .dropdown-item-selected {
-    color: rgb(68, 68, 115);
+    color: rgb(68, 68, 115) !important;
 }
 
 .dropdown-item-selected:hover .dropdown-link {
-    color: rgb(0, 0, 133);
+    color: rgb(0, 0, 133) !important;
 }
 
 .dropdown-item:hover .dropdown-link, .dropdown-item-selected .dropdown-link {
-    color: rgb(59, 59, 217);
+    color: rgb(59, 59, 217) !important;
 }
 
 .dropdown-item-selected:hover {
