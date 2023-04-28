@@ -1,0 +1,30 @@
+[
+    {"type": "link", "content": "index.html", "text":"Home"},
+    {"type": "dropdown", "text":"Links", "content": [
+        {"content": "mcStacker.html", "text":"MC stacker"},
+        {"content": "https://www.htl-kaindorf.at", "text":"HTBLA Kaindorf"},
+        {"content": "colleaguesPage.html", "text":"Website of Colleague"},
+        {"content": "favBand.html", "text":"\"Favorite\" Band"},
+        {"content": "makeitmeme.html", "text":"Make It Meme"}
+    ]},
+    {"type":"dropdown", "text":"Goofy", "content": [
+        {"content": "gallery.html", "text":"Gallery"},
+        {"content": "music_videos.html", "text":"Music/Videos"},
+        {"content": "schoolTable.html", "text":"School Table"},
+        {"content": "bubbleSort.html", "text":"Bubble Sort"},
+        {"content": "recipe.html", "text":"Recipe"},
+        {"content": "weekendArticle.html", "text":"Weekend Advertising"}
+    ]},
+    {"type":"dropdown", "text":"Games", "content": [
+        {"content": "leapAdventure.html", "text": "Leap Adventure"}
+    ]},
+    {"type":"dropdown", "text":"Langs", "content": [
+        {"content": "brainfuck.html", "text": "Brainf*ck"},
+        {"content": "weirdJS.html", "text": "Weird JS"},
+        {"content": "weirdLang.html", "text": "Weird Lang (incomplete)"},
+        {"content": "shortOLang.html", "text": "Short O"}
+    ]},
+    {"type": "link", "content": "todoList.html", "text": "Todo List"},
+    {"type": "link", "content": "goofHotel.html", "text":"Goof Hotel"},
+    {"type": "link", "content": "registration.html", "text":"Sign in"}
+]

@@ -1,0 +1,162 @@
+{
+    "game_modes": {
+        "easy": {
+            "moving_platform_chances": [],
+            "platform_chances": [
+                {"min_score": 0, "spawn_chances": [0, 0, 0, 0, 0.2, 0]},
+                {"min_score": 200, "spawn_chances": [0, 0, 0.2, 0, 0.2, 0]}
+            ],
+            "default_platform": 0
+        },
+        "bouncy": {
+            "moving_platform_chances": [
+                {"min_score": 10, "chance": 0.1},
+                {"min_score": 200, "chance": 0.2},
+                {"min_score": 500, "chance": 0.3},
+                {"min_score": 700, "chance": 0.4},
+                {"min_score": 1200, "chance": 0.6},
+                {"min_score": 2300, "chance": 0.9}
+            ],
+            "platform_chances": [
+                {"min_score":    0, "spawn_chances": [0.02, 0, 0, 0, 0, 0.01], "none": 0.2},
+                {"min_score":   20, "spawn_chances": [0.02, 0, 0, 0.05, 0, 0], "none": 0.2},
+                {"min_score":  200, "spawn_chances": [0.02, 0.07, 0, 0.05, 0, 0], "none": 0.2},
+                {"min_score":  300, "spawn_chances": [0.02, 0.07, 0, 0.05, 0, 0], "none": 0.21},
+                {"min_score":  400, "spawn_chances": [0.02, 0.07, 0, 0.09, 0, 0], "none": 0.21},
+                {"min_score":  600, "spawn_chances": [0.02, 0.07, 0, 0.12, 0, 0], "none": 0.24},
+                {"min_score": 1000, "spawn_chances": [0.02, 0.07, 0, 0.12, 0, 0], "none": 0.25},
+                {"min_score": 1100, "spawn_chances": [0.02, 0.07, 0, 0.14, 0, 0], "none": 0.25}
+                
+            ],
+            "default_platform": 4
+        },
+        "surprise": {
+            "moving_platform_chances": [
+                {"min_score": 0, "chance": 0.1}
+            ],
+            "platform_chances": [
+                {"min_score": 0, "spawn_chances": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01], "none": 0.01}
+            ],
+            "default_platform": 5
+        },
+        "falling apart":{
+            "moving_platform_chances": [
+                {"min_score": 10, "chance": 0.1},
+                {"min_score": 50, "chance": 0.2},
+                {"min_score": 200, "chance": 0.4}
+            ],
+            "platform_chances": [
+                {"min_score": 0, "spawn_chances": [0, 0.1, 0.15, 0, 0, 0.1], "none": 0},
+                {"min_score": 50, "spawn_chances": [0, 0.2, 0.25, 0, 0, 0.1], "none": 0.05},
+                {"min_score": 200, "spawn_chances": [0, 0.3, 0.35, 0, 0, 0.1], "none": 0.1},
+                {"min_score": 500, "spawn_chances": [0, 0.35, 0.4, 0, 0, 0.05], "none": 0.2}
+            ],
+            "default_platform": 0
+        },
+        "default": {
+            "moving_platform_chances": [
+                {"min_score": 10, "chance":0.1},
+                {"min_score": 200, "chance":0.2},
+                {"min_score": 500, "chance":0.3},
+                {"min_score": 700, "chance":0.4},
+                {"min_score": 1200, "chance":0.6},
+                {"min_score": 2300, "chance":0.9}
+            ],
+            "platform_chances": [
+                {"min_score":   20, "spawn_chances":[0, 0, 0.05, 0, 0.03, 0.01], "none": 0},
+                {"min_score":   50, "spawn_chances":[0, 0, 0.05, 0, 0.03, 0.01], "none": 0.005},
+                {"min_score":  200, "spawn_chances":[0, 0.07, 0.05, 0, 0.03, 0.02], "none": 0.005},
+                {"min_score":  300, "spawn_chances":[0, 0.07, 0.05, 0, 0.03, 0.02], "none": 0.015},
+                {"min_score":  400, "spawn_chances":[0, 0.07, 0.02, 0.04, 0.03, 0.02], "none": 0.015},
+                {"min_score":  500, "spawn_chances":[0, 0.07, 0.02, 0.04, 0.06, 0.03], "none": 0.015},
+                {"min_score":  600, "spawn_chances":[0, 0.07, 0.02, 0.04, 0.09, 0.05], "none": 0.055},
+                {"min_score": 1000, "spawn_chances":[0, 0.1, 0.03, 0.05, 0.07, 0.02], "none": 0.065},
+                {"min_score": 1300, "spawn_chances":[0, 0.1, 0.03, 0.05, 0.03, 0.01], "none": 0.1}
+            ],
+            "default_platform": 0
+        },
+        "dangerous": {
+            "moving_platform_chances": [
+                {"min_score": 0, "chance": 0.9}
+            ],
+            "platform_chances": [
+                {"min_score": 0, "spawn_chances": [0, 0, 0, 1, 0, 0, 0]}
+            ],
+            "default_platform": 2
+        },
+        "hard": {
+            "moving_platform_chances": [
+                {"min_score":    0, "chance": 0.2},
+                {"min_score":  500, "chance": 0.4},
+                {"min_score":  800, "chance": 0.6},
+                {"min_score": 1200, "chance": 0.8}
+            ],
+            "platform_chances": [
+                {"min_score": 20, "spawn_chances": [0, 0, 0.05, 0, 0.03, 0], "none": 0},
+                {"min_score": 50, "spawn_chances": [0, 0, 0.05, 0, 0.03, 0], "none": 0.005},
+                {"min_score": 200, "spawn_chances": [0, 0.07, 0.05, 0, 0.03, 0], "none": 0.005},
+                {"min_score": 300, "spawn_chances": [0, 0.07, 0.05, 0, 0.03, 0], "none": 0.015},
+                {"min_score": 400, "spawn_chances": [0, 0.07, 0.07, 0.04, 0.03, 0], "none": 0.015},
+                {"min_score": 500, "spawn_chances": [0, 0.07, 0.07, 0.04, 0.06, 0], "none": 0.015},
+                {"min_score": 600, "spawn_chances": [0, 0.07, 0.07, 0.07, 0.06, 0], "none": 0.015},
+                {"min_score": 1000, "spawn_chances": [0, 0.07, 0.07, 0.07, 0.06, 0], "none": 0.025},
+                {"min_score": 1100, "spawn_chances": [0, 0.07, 0.07, 0.09, 0.03, 0], "none": 0.035}
+            ],
+            "default_platform": 2
+        },
+        "hell": {
+            "moving_platform_chances": [
+                {"min_score": 0, "chance": 0.9}
+            ],
+            "platform_chances": [
+                {"min_score": 0, "spawn_chances": [0, 0, 0, 0.95, 0, 0]}
+            ],
+            "default_platform": 2
+        },
+        "rofl": {
+            "moving_platform_chances": [
+                {"min_score": 0, "chance": 1}
+            ],
+            "platform_chances": [
+                {"min_score": 0, "spawn_chances": [0, 0, 0, 0.9, 0, 0]}
+            ],
+            "default_platform": 2,
+            "gravity": -3
+        }
+    },
+    "platforms": [
+        {
+            "jump_type": 1,
+            "img": "IMG/leapAdventure/Platform_Normal.png",
+            "color": "green"
+        },
+        {
+            "jump_type": 0,
+            "img": "IMG/leapAdventure/Platform_Broken.png",
+            "color": "gray",
+            "jump_event": -1
+        },
+        {
+            "jump_type": 1,
+            "img": "IMG/leapAdventure/Platform_Ghost.png",
+            "color": "gray",
+            "jump_event": -1
+        },
+        {
+            "jump_type": -1,
+            "img": "IMG/leapAdventure/Platform_Deadly.png",
+            "color": "red"
+        },
+        {
+            "jump_type": 2,
+            "img": "IMG/leapAdventure/Platform_Boost.png",
+            "color": "orange"
+        },
+        {
+            "jump_type": 1,
+            "img": "IMG/leapAdventure/Platform_Surprise.png",
+            "color": "purple",
+            "jump_event": 0
+        }
+    ]
+}
