@@ -766,7 +766,7 @@ DROPDOWN
 }
 
 .dropdown-link {
-    color: white;
+    color: white !important;
     text-decoration: none;
     font-weight: bold;
     text-transform: uppercase;
