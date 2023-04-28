@@ -37,51 +37,7 @@
     </form>
 
     <div id="info">
-        <p>
-            "ShortO" is a Stack-based esoteric Programming Language created to make outputting text very easy<br>
-            - Stack: any value used from the stack will automatically be removed from the stack
-            - To print text to the console, just type the text<br>
-            - To have some more functionalities you can create a code block by using $<br>
-            - A code block is terminated by a ; and can be used to do the following:<br>
-            &emsp;+ To push a number onto the stack just write the number<br>
-            &emsp;+ To push a string onto the stack write the text surrounded by "<br>
-            &emsp;+ +: add the second from top value to the to value off the stack (Strings concatenate)<br>
-            &emsp;+ - remove the top value from the second from top value on the stack (number reduce length of string, string removes its value from other string)<br>
-            &emsp;+ *: multiply the top value with the second from top value off the stack (strings repeat number times, string and string produce the number 0)<br>
-            &emsp;+ /: divide the second from top value by the top value off the stack (string produces the number 0)<br>
-            &emsp;+ %: get the remainder of dividing the second from top value by the top value on the stack (string produces 0)<br>
-            &emsp;+ ,: print the top value of the stack<br>
-            &emsp;+ X: remove the top value of the stack<br>
-            &emsp;+ .: read a character from the user and put it onto the stack<br>
-            &emsp;+ !: negate the top value from stack <br>
-            &emsp;+ ': turn a number into the according unicode character<br>
-            &emsp;+ ~: turn a string number into an actual number<br>
-            &emsp;+ ^: repeat the top value of the stack (top value -> amount, second value -> repeated value)<br>
-            &emsp;+ S: turn a number into its string form<br>
-            &emsp;+ N: split each character from a string into its unicode value<br>
-            &emsp;+ >: skip following tokens if checked value is true (top value -> amount, second value -> check)<br>
-            &emsp;+ =: compare the second from top value with the top value (0: values equal, -1: top value greater, 1: bottom value greater; strings are always bigger than numbers)<br>
-            &emsp;+ v: reverse n amount of values (n: top value)<br>
-            &emsp;+ #: jump to a marker with the same name (name: string after #, terminated by ;)<br>
-            &emsp;+ D: remove n amount of characters from the output (n: top  value (string as its length))<br>
-            &emsp;+ _: reads a string and adds it to the stack<br>
-            &emsp;+ T: checks the type of the top value from the stack. 0:number, 1:string<br>
-            &emsp;+ C: clear console<br>
-            &emsp;+ L: determines the length of the top value from the stack (numbers: as positive int) <br>
-            &emsp;+ |: checks if at least one of the top two values is true<br>
-            &emsp;+ &: checks if both of the top two values are true<br>
-            - markers are defined positions inside of the code where the program can jump to.<br>
-            - #: define a marker with a name (name: string after #, terminated by ;)<br>
-            - \: print the following character to the console regardless of the type ($, #, \)<br>
-            - Tokens are blocks of code that have a defined functionality<br>
-            - Every token has a type and a value. following types exist:<br>
-            - Booleans don't exist, so 0 and empty string are considered false, any other value is considered true<br>
-            &emsp;+ Text: one continues line of text without special characters create a single token<br>
-            &emsp;+ Marker do NOT create a token, however they will split the Text tokens<br>
-            &emsp;+ Value: strings ore numbers defined in a codeblock, they will automatically be added to the stack<br>
-            &emsp;+ Operator: any single-character instruction possible in the codeblock<br>
-            &emsp;+ Jump: a marker defined in a codeblock creates a jump token<br>
-        </p>
+        <a href="https://esolangs.org/wiki/ShortO">ShortO entry in Esolang Wiki</a>
     </div>
 
 </body>
