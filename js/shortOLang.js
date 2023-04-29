@@ -41,7 +41,8 @@ const operators = {
         let right = popFromStack();
         let left = popFromStack();
 
-        stack.push(left + right);
+        
+        stack.push(checkNumber(left + right));
     },
     '-': () => {
         let right = popFromStack();
@@ -52,7 +53,7 @@ const operators = {
                 return;
             }
 
-            stack.push(left - right);
+            stack.push(checkNumber(left - right));
             return;
         }
         
@@ -72,7 +73,7 @@ const operators = {
                 return;
             }
 
-            stack.push(left * right);
+            stack.push(checkNumber(left * right));
             return;
         }
         
@@ -87,7 +88,8 @@ const operators = {
         let right = popFromStack();
         let left = popFromStack();
         if(typeof right === typeof left && typeof right === "number") {
-            stack.push(left / right);
+
+            stack.push(checkNumber(left / right));
             return;
         }
 
@@ -97,7 +99,7 @@ const operators = {
         let right = popFromStack();
         let left = popFromStack();
         if(typeof right === typeof left && typeof right === "number") {
-            stack.push(left % right);
+            stack.push(checkNumber(left % right));
             return;
         }
 
@@ -110,9 +112,8 @@ const operators = {
             stack.push(value);
             return;
         }
-        value = parseFloat(value);
-        if(isNaN(value)) value = "N/A";
-        stack.push(value);
+
+        stack.push(checkNumber(parseFloat(value)));
     },
     '\'': () => {
         let value = popFromStack();
@@ -212,7 +213,18 @@ const operators = {
         stack.push(count);
     },
     '|': () => {stack.push(+!!(popFromStack() || popFromStack()))},
-    '&': () => {stack.push(+!!(popFromStack() && popFromStack()))}
+    '&': () => {stack.push(+!!(popFromStack() && popFromStack()))},
+    '?': () => {stack.push(Math.random())},
+    '°': () => {
+        let value = popFromStack();
+
+        if(typeof value === 'string') {
+            stack.push(value);
+            return;
+        }
+
+        stack.push(Math.floor(value));
+    }
 }
 
 class SpecialCharacter {
@@ -492,6 +504,9 @@ function runCode() {
             }
     
             if(instruction.type === TokenType.VALUE) {
+                if(typeof instruction.value === "number") {
+                    if(instruction.value > Number.MAX_SAFE_INTEGER) instruction.value = Number.MAX_SAFE_INTEGER;
+                }
                 stack.push(instruction.value);
                 continue;
             }
@@ -517,6 +532,17 @@ function runCode() {
     }catch(e) {
         displayError(e);
     }
+}
+
+/**
+ * @param {number} number 
+ * @returns {string | number}
+ */
+function checkNumber(number) {
+    if(isNaN(number)) return "N/A";
+    if(number > Number.MAX_SAFE_INTEGER) return "Infinity";
+    if(number < Number.MIN_SAFE_INTEGER) return "-Infinity";
+    return number;
 }
 
 /**
@@ -684,3 +710,6 @@ document.addEventListener("keydown", e => {
     }
 
 });
+document.querySelector("#info p").innerHTML = `Interpreter Info:<br>
+    Max number: ${Number.MAX_SAFE_INTEGER}<br>
+    Min number: ${Number.MIN_SAFE_INTEGER}`;
