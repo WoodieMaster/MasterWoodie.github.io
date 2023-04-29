@@ -41,8 +41,11 @@ const operators = {
         let right = popFromStack();
         let left = popFromStack();
 
+        let value = left + right;
         
-        stack.push(checkNumber(left + right));
+        if(typeof value === "number") value = checkNumber(value);
+        
+        stack.push(value);
     },
     '-': () => {
         let right = popFromStack();
@@ -62,7 +65,7 @@ const operators = {
             return;
         }
 
-        stack.push(left.slice(0, left.length-right));
+        stack.push(left.substring(0, left.length-right));
     },
     '*': () => {
         let right = popFromStack();
