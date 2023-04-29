@@ -320,11 +320,6 @@ class Token {
             return char = string[idx++];
         }
 
-        function retrieve() {
-            idx--;
-            return char = string[idx-1];
-        }
-
         /**
          * 
          * @param {string} msg 
@@ -421,6 +416,9 @@ class Token {
                     if(advance() === SpecialCharacter.COMMENT) {
                         while(advance() && char !== '\n');
                         if(!char) break;
+                    }else {
+                        idx--;
+                        char = SpecialCharacter.COMMENT;
                     }
                 }
 
