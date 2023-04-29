@@ -81,10 +81,12 @@ const operators = {
         }
         
         if(typeof right === "string") {
+            left = Math.abs(left);
             stack.push(right.repeat(left));
             return;
         }
 
+        right = Math.abs(right);
         stack.push(left.repeat(right));
     },
     '/': () => {
@@ -227,7 +229,8 @@ const operators = {
         }
 
         stack.push(Math.floor(value));
-    }
+    },
+    'l': () => {stack.push(stack.length)}
 }
 
 class SpecialCharacter {
@@ -505,10 +508,9 @@ function runCode() {
             }
     
             if(instruction.type === TokenType.VALUE) {
-                if(typeof instruction.value === "number") {
-                    if(instruction.value > Number.MAX_SAFE_INTEGER) instruction.value = Number.MAX_SAFE_INTEGER;
-                }
-                stack.push(instruction.value);
+                if(typeof instruction.value === "number") stack.push(checkNumber(instruction.value));
+                else stack.push(instruction.value);
+                
                 continue;
             }
     
@@ -541,8 +543,8 @@ function runCode() {
  */
 function checkNumber(number) {
     if(isNaN(number)) return "N/A";
-    if(number > Number.MAX_SAFE_INTEGER) return "Infinity";
-    if(number < Number.MIN_SAFE_INTEGER) return "-Infinity";
+    if(number > Number.MAX_VALUE) return "Infinity";
+    if(number < -Number.MAX_VALUE) return "-Infinity";
     return number;
 }
 
