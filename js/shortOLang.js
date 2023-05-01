@@ -103,6 +103,7 @@ const operators = {
     '%': () => {
         let right = popFromStack();
         let left = popFromStack();
+
         if(typeof right === typeof left && typeof right === "number") {
             stack.push(checkNumber(left % right));
             return;
@@ -218,8 +219,16 @@ const operators = {
 
         stack.push(count);
     },
-    '|': () => {stack.push(+!!(popFromStack() || popFromStack()))},
-    '&': () => {stack.push(+!!(popFromStack() && popFromStack()))},
+    '|': () => {
+        let right = popFromStack();
+        let left = popFromStack();
+        stack.push(+!!(right || left))
+    },
+    '&': () => {
+        let right = popFromStack();
+        let left = popFromStack();
+        stack.push(+!!(right && left))
+    },
     '?': () => {stack.push(Math.random())},
     '°': () => {
         let value = popFromStack();
@@ -544,8 +553,8 @@ function runCode() {
  */
 function checkNumber(number) {
     if(isNaN(number)) return "N/A";
-    if(number > Number.MAX_VALUE) return "Infinity";
-    if(number < -Number.MAX_VALUE) return "-Infinity";
+    if(number === -Infinity) return "-Infinity";
+    if(number === Infinity) return "Infinity";
     return number;
 }
 
