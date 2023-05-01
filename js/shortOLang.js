@@ -653,15 +653,16 @@ fileInputElement.addEventListener("change", async e => {
     fr.readAsText(file);
 });
 document.addEventListener("keydown", e => {
-    if(!codeIsExecuting) return;
-
     let key = e.key;
+    
+    if(!codeIsExecuting) return;
+    
     if(key === "Escape") {
         terminateCode();
         return;
     }
 
-    if(waitForInput && outputElement === document.activeElement) {
+    if(waitForInput && document.activeElement === outputElement) {
         e.preventDefault();
         if(key === "Enter") key = "\n";
         if(key === "Tab") key = "\t";
@@ -710,7 +711,6 @@ document.addEventListener("keydown", e => {
                 return;
             }
         }
-        
     }
 
 });
