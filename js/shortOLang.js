@@ -195,8 +195,9 @@ const operators = {
         if(typeof amount === "string") {
             amount = amount.length;
         }
-
-        outputElement.value = outputElement.value.substring(0, outputElement.value.length-amount);
+        amount = outputElement.value.length-amount;
+        stack.push(outputElement.value.substring(amount));
+        outputElement.value = outputElement.value.substring(0, amount);
     },
     'T': () => {stack.push(typeof popFromStack() === "string"?1:0)},
     'C': () => {outputElement.value = ""},
