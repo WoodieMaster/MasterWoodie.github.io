@@ -16,6 +16,7 @@ const fileInputElement = document.getElementById("code-file");
 
 const LETTER_VALUE_START = "a".charCodeAt(0);
 const DIGIT_VALUE_START = "0".charCodeAt(0);
+const LAG_TIME = 10;
 
 /**
  * @type {[string|number]}
@@ -509,6 +510,7 @@ function runCode() {
      */
     let instruction;
     try {
+        let startTime = Date.now();
         while(advance()) {
             if(!codeIsExecuting) break;
 
@@ -527,8 +529,6 @@ function runCode() {
             if(instruction.type === TokenType.JUMP) {
                 if(marker[instruction.value] == undefined) runtimeError(`No marker for "${instruction.value}" detected`);
                 instructionIdx = marker[instruction.value];
-                requestAnimationFrame(runCode);
-                return;
             }
     
             if(instruction.type === TokenType.OPERATOR) {
@@ -540,6 +540,11 @@ function runCode() {
             }
     
             if(waitForInput) return;
+
+            if(Date.now() > LAG_TIME + startTime) {
+                requestAnimationFrame(runCode);
+                return;
+            }
         }
         terminateCode();
     }catch(e) {
