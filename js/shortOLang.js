@@ -14,9 +14,8 @@ const fileUploadContainer = document.getElementById("file-upload");
  */
 const fileInputElement = document.getElementById("code-file");
 
-const LETTER_VALUE_START = "a".charCodeAt(0);
-const DIGIT_VALUE_START = "0".charCodeAt(0);
 const LAG_TIME = 10;
+const LOCAL_STORAGE_CODE_ID = "shortOCode";
 
 /**
  * @type {[string|number]}
@@ -573,16 +572,6 @@ function displayError(msg) {
 }
 
 /**
- * @param {string} char
- * @returns {boolean} 
- */
-function isLetterOrUnderscore(char) {
-    let charVal = char.charCodeAt(0);
-
-    return char === "_" || (charVal >= LETTER_VALUE_START && charVal < LETTER_VALUE_START + 26);
-}
-
-/**
  * @param {string} char 
  * @returns {boolean}
  */
@@ -596,9 +585,7 @@ function isWhitespace(char) {
  * @returns {boolean} 
  */
 function isDigit(char) {
-    let charVal = char.charCodeAt(0);
-
-    return charVal >= DIGIT_VALUE_START && charVal < DIGIT_VALUE_START + 10;
+    return char >= "0" && char <= "9";
 }
 
 /**
@@ -650,11 +637,11 @@ runButton.addEventListener("click", () => {
     if(codeIsExecuting) terminateCode();
     else startExecution();
 });
-clearButton.addEventListener("click", e => {
+clearButton.addEventListener("click", () => {
     Console.clear();
 });
-fileUploadContainer.addEventListener("click", e => fileInputElement.click());
-fileInputElement.addEventListener("change", async e => {
+fileUploadContainer.addEventListener("click", () => fileInputElement.click());
+fileInputElement.addEventListener("change", async () => {
     let file = fileInputElement.files[0];
     let fr = new FileReader();
     
@@ -728,6 +715,8 @@ document.addEventListener("keydown", e => {
     }
 
 });
-document.querySelector("#info p").innerHTML = `Interpreter Info:<br>
-    Max number: ${Number.MAX_SAFE_INTEGER}<br>
-    Min number: ${Number.MIN_SAFE_INTEGER}`;
+inputElement.addEventListener("change", () => {
+    localStorage.setItem(LOCAL_STORAGE_CODE_ID, inputElement.value);
+});
+
+inputElement.value = localStorage.getItem(LOCAL_STORAGE_CODE_ID) || "";
