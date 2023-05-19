@@ -6,8 +6,7 @@
     {"type":"dropdown", "text":"Interpreters", "content": [
         {"content": "./brainfuck", "text": "Brainf*ck"},
         {"content": "./weirdJS", "text": "Weird JS"},
-        {"content": "./weirdLang", "text": "Weird Lang (incomplete)"},
-        {"content": "./shortOLang", "text": "Short O (First Release)"},
+        {"content": "./shortOLang", "text": "Short O"},
         {"content": "standardChess", "text": "Standard Chess"}
     ]},
     {"type":"dropdown", "text":"Other Stuff", "content": [
