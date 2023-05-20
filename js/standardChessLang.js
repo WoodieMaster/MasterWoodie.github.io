@@ -22,19 +22,15 @@ const TAPE_LENGTH = 30_000;
 const MAX_NUMBER = 256;
 
 /**
- * @type {number[]}
+ * @type {Uint8Array}
  */
-const tape = [];
+let tape;
 
 let instructionIdx = 0;
 let inputType = 0;
 let codeIsExecuting = false;
 let tapeIdx = 0;
 let inputLength = 0;
-/**
- * @type {number[]}
- */
-let loopStarts = [];
 
 class TokenType {
     static MOVE = 0;
@@ -335,9 +331,7 @@ class Console {
 function startExecution() {
         setInput(0);
         instructionIdx = 0;
-        loopStarts = [];
-        tape.length = 0;
-        for(let i = 0; i < TAPE_LENGTH; i++) tape.push(0);
+        tape = new Uint8Array(TAPE_LENGTH);
 
         Console.clear();
         outputElement.style.borderColor = "red";
@@ -490,11 +484,18 @@ function runCode() {
                 continue;
             }else if(instruction.type === TokenType.CASTLE) {
                 if(instruction.value.length === 5) {
-                    if(loopStarts.length === 0) runtimeError("No Start of Loop");
-                    instructionIdx = loopStarts.pop();
+                    let skip = 0;
+                    while(retrieve()) {
+                        if(instruction.type === TokenType.CASTLE) {
+                            if(instruction.value.length === 3) {
+                                if (skip === 0) break;
+                                skip--;
+                                continue;
+                            }
+                            skip++;
+                        }
+                    }
                 }
-
-                loopStarts.push(instructionIdx);
             }
 
             if(inputType) return;
@@ -596,7 +597,7 @@ function terminateCode() {
     outputElement.style.removeProperty("border-color");
     codeIsExecuting = false;
     runButton.innerHTML = "Run";
-    tape.length = 0;
+    tape = null;
 }
 
 runButton.addEventListener("click", () => {
