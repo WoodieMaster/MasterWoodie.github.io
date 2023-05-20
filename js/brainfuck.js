@@ -6,6 +6,9 @@ const fileUploadContainer = document.getElementById("file-upload");
  * @type {HTMLInputElement}
  */
 const fileInput = document.getElementById("code-file");
+
+const LAG_TIME = 15;
+
 /**
  * stores 30_000 items of one byte
  * @type {Uint8Array} */
@@ -21,10 +24,11 @@ let currentCode = "";
 let codeIdx = 0;
 let arrayIdx = 0;
 let isRunning = false;
+let char = ' ';
 
 /**removes first char from string and returns it*/
 function nextChar() {
-    return currentCode[codeIdx++];
+    return char = currentCode[codeIdx++];
 }
 
 /**interprets the brainfuck code*/
@@ -42,7 +46,6 @@ function interpret() {
                 arrayIdx < 0 && (arrayIdx = array.length + arrayIdx);
                 break;
             case '.':
-                console.log(array[arrayIdx]);
                 output.value += String.fromCharCode(array[arrayIdx]);
                 break;
             case '+':
@@ -55,17 +58,29 @@ function interpret() {
                 needsInput = true;
                 return;
             case '[':
-                loopMarker.push(codeIdx-1);
+                if(array[arrayIdx] === 0) {
+                    let count = 0;
+                    while (nextChar()) {
+                        if(char === ']') {
+                            if(count === 0) break;
+                            count--;
+                            continue;
+                        }
+
+                        if(char === '[') count++;
+                    }
+                }else loopMarker.push(codeIdx);
                 break;
             case ']':
                 let idx = loopMarker.pop();
-                if(idx != undefined && array[arrayIdx] != 0)
+                if(idx !== undefined && array[arrayIdx] !== 0) {
                     codeIdx = idx;
-
-                requestAnimationFrame(interpret);
-                return;
-            default:
-                break;
+                    loopMarker.push(idx);
+                }
+        }
+        if(Date.now() > LAG_TIME + startTime) {
+            requestAnimationFrame(interpret);
+            return;
         }
     }
     codeFinished();
