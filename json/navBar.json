@@ -1,16 +1,16 @@
 [
     {"type": "link", "content": "./", "text":"Home"},
     {"type":"dropdown", "text":"Games", "content": [
-        {"content": "./leapAdventure", "text": "Leap Adventure"}
+        {"content": "./leapAdventure.html", "text": "Leap Adventure"}
     ]},
     {"type":"dropdown", "text":"Interpreters", "content": [
-        {"content": "./brainfuck", "text": "Brainf*ck"},
-        {"content": "./weirdJS", "text": "Weird JS"},
-        {"content": "./shortOLang", "text": "Short O"},
-        {"content": "standardChess", "text": "Standard Chess"}
+        {"content": "./brainfuck.html", "text": "Brainf*ck"},
+        {"content": "./shortOLang.html", "text": "Short O"},
+        {"content": "standardChess.html", "text": "Standard Chess"}
     ]},
+    {"type":"link","content": "./weirdJS.html", "text": "JS Converter"},
     {"type":"dropdown", "text":"Other Stuff", "content": [
-        {"content": "./todoList", "text": "Todo List"},
-        {"content": "./goofHotel", "text":"Goof Hotel"}
+        {"content": "./todoList.html", "text": "Todo List"},
+        {"content": "./goofHotel.html", "text":"Goof Hotel"}
     ]}
 ]
