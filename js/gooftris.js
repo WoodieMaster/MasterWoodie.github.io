@@ -209,7 +209,7 @@ function setDisplayStyle(message, buttonText, isVisible = true) {
         return;
     }
     startDisplay.firstElementChild.innerHTML = message;
-    startDisplay.lastElementChild.innerHTML = buttonText;
+    startDisplay.children[1].innerHTML = buttonText;
     startDisplay.style.display = "block";
 }
 

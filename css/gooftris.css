@@ -95,12 +95,25 @@
     height: 15%;
     margin: auto;
     position: relative;
-    top: 30%;
+    top: 10%;
     font-size: 40px;
 }
 
 #start button {
     width: 40%;
+}
+
+#info * {
+    font-size: 15px;
+    margin: 1% 0;
+}
+
+#info {
+    border: 1px solid grey;
+    height: fit-content;
+    padding: 1%;
+    margin-top: 5%;
+    background-color: rgba(0,0,0,.5);
 }
 
 button {
