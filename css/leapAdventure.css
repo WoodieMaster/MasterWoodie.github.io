@@ -9,36 +9,6 @@
 
 /*****************************************************************************************************************
 ******************************************************************************************************************
-Loading Screen
-*****************************************************************************************************************
-*****************************************************************************************************************/
-#loading-screen {
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    background-image: url("../IMG/Background.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    z-index: 1000;
-    position: absolute;
-    top: 0;
-    animation: loading-fadeout 2s ease-in .3s forwards;
-    animation-play-state: paused;
-}
-
-@keyframes loading-fadeout {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-/*****************************************************************************************************************
-******************************************************************************************************************
 Game Objects
 *****************************************************************************************************************
 *****************************************************************************************************************/
@@ -57,16 +27,15 @@ Game Container
 *****************************************************************************************************************/
 
 #game {
-    width: 300px;
     height: 450px;
+    aspect-ratio: 30/45;
     background-image: url("../IMG/leapAdventure/Background.png");
-    font-family: Scifi;
+    font-family: Scifi, serif;
     background-size: 60%;
-    margin: 2vh auto 0;
+    margin: 12vh auto 0;
     border: 1px solid yellow;
     overflow: hidden;
     position: relative;
-    overflow: hidden;
 }
 
 #game * {
@@ -336,7 +305,7 @@ Main Menu
     --width: 10%;
     width: var(--width);
     left: calc(50% - var(--width) / 2);
-    font-family: Scifi;
+    font-family: Scifi, serif;
     font-size: 15px;
     text-align: center;
 }
@@ -361,7 +330,7 @@ Main Menu
 }
 
 #game-mode #game-mode-input {
-    border: 5px solid gray;
+    border: 5px solid rgb(128, 128, 128);
     border-bottom-color: rgb(88, 88, 88);
     border-radius: 0;
     background-color: black;
@@ -370,7 +339,7 @@ Main Menu
 }
 
 #list-input {
-    border: 5px solid gray;
+    border: 5px solid rgb(128, 128, 128);
     border-bottom-color: rgb(88, 88, 88);
     border-radius: 0;
     background-color: black;
@@ -378,5 +347,5 @@ Main Menu
 }
 
 #list-input * {
-    font-family: "Scifi";
+    font-family: Scifi, serif;
 }

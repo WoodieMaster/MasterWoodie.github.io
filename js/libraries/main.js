@@ -1,18 +1,18 @@
 export class Html {
     /**
      * creates a new html element, where you can directly edit the data of that element
-     * @param {string} element type of the element
-     * @param {{attributes: {}, innerHTML: string} | undefined} data the data added to the element
-     * @param {HTMLElement | undefined} parent the parent to which the elemnt will be appended to
+     * @param {string} type type of the element
+     * @param {{attributes: {} | undefined, innerHTML: string | undefined} | undefined} data the data added to the element
+     * @param {HTMLElement | undefined} parent the parent to which the element will be appended to
      * @return {HTMLElement}
      */
-    static createElement(type, data, parent) {
+    static createElement(type, data, parent ) {
         const element = document.createElement(type);
         
         if(data == null) return element;
 
-        if(data.innerHTML != undefined) element.innerHTML = data.innerHTML;
-        if(data.attributes != undefined) {
+        if(data.innerHTML !== undefined) element.innerHTML = data.innerHTML;
+        if(data.attributes !== undefined) {
             Object.keys(data.attributes).forEach(key => {
                 element.setAttribute(key, data.attributes[key]);
             });
@@ -25,7 +25,7 @@ export class Html {
 }
 
 /**
- * holds all the data for Vector2s and calculations related to them
+ * holds all the data for Vector2 and calculations related to them
  */
 export class Vector2 {
     /**
@@ -319,7 +319,7 @@ export class Vector2 {
      * @returns {boolean}
      */
     static equals(a,b) {
-        return a.x == b.x && a.y == b.y;
+        return a.x === b.x && a.y === b.y;
     }
 
     /**
@@ -412,10 +412,6 @@ export class Collider {
         }
 
         /**
-         * @type {CircleCollider}
-         */
-        let circle;
-        /**
          * @type {Vector2}
          */
         let circlePos;
@@ -424,28 +420,20 @@ export class Collider {
          */
         let circleSize;
         /**
-         * @type {BoxCollider}
-         */
-        let box;
-        /**
          * @type {Vector2}
          */
         let boxPos;
         let boxSize;
         
 
-        if(this.type === 0) { 
-            box = this;
+        if(this.type === 0) {
             boxPos = thisPos;
             boxSize = thisSize;
-            circle = other;
             circlePos = otherPos;
             circleSize = otherSize;
         }else {
-            circle = this;
             circlePos = thisPos;
             circleSize = thisSize;
-            box = other;
             boxPos = otherPos;
             boxSize = otherSize;
         }
@@ -603,9 +591,9 @@ export class Help {
         if(a.length < b.length) return -1;
 
         for(let i = 0; i < a.length; i++) {
-            aValue = string.indexOf(a[i].toLowerCase());
+            let aValue = string.indexOf(a[i].toLowerCase());
             if(aValue < 0) aValue = a.charCodeAt(i);
-            bValue = string.indexOf(b[i]);
+            let bValue = string.indexOf(b[i]);
             if(bValue < 0) bValue = a.charCodeAt(i);
             
             if(aValue < bValue) return -1;

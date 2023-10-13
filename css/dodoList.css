@@ -1,0 +1,149 @@
+
+.task-status {
+    text-align: center;
+    min-width: fit-content;
+    background-color: transparent;
+    border-radius: 5px;
+    --color: rgb(128, 128, 128);
+    border-color: var(--color);
+    color: var(--color);
+}
+
+#open-add-task, #reset-tasks {
+    border: 1px solid rgb(76, 198, 216);
+    color: rgb(76, 198, 216);
+    border-radius: 5px;
+    background-color: transparent;
+    padding: .5%;
+    cursor: pointer;
+}
+
+#reset-tasks {
+    margin-top: 3%;
+}
+
+#open-add-task:hover, #reset-tasks:hover {
+    background-color: rgb(76, 198, 216);
+    color: black;
+}
+
+.remove-task, .edit-task {
+    cursor:  pointer;
+    border: 1px solid var(--color);
+    aspect-ratio: 1/1;
+    padding: 5%;
+    border-radius: 5px;
+    color: var(--color);
+}
+
+.remove-task:hover, .edit-task:hover {
+    color: black;
+    background-color: var(--color);
+}
+
+.edit-task {
+    --color: rgb(76, 198, 216);
+}
+
+.remove-task {
+    --color: rgb(215, 215, 215);
+}
+
+.task-data {
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    cursor: default;
+    min-width: 90%;
+    padding: 1.5%;
+    text-align: center;
+    overflow-x: scroll;
+}
+
+.todo-alert {
+    color: red;
+    border: 1px solid red;
+    margin: 1% auto;
+    width: fit-content;
+    padding: 1%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.todo-alert:hover {
+    color: black;
+    background-color: red;
+}
+
+.task-data[data-edit] {
+    background-color: rgb(128, 128, 128);
+    color: white;
+    cursor:text;
+}
+
+.task-data[data-edit]:focus {
+    background-color: white;
+    color: black;
+}
+
+.task-status:hover {
+    color: black;
+    background-color: var(--color);
+}
+
+.task-status[value="Todo"] {
+    --color:rgb(196, 196, 196);
+}
+
+.task-status[value="Complete"] {
+    --color: rgb(51, 189, 51);
+}
+
+.task-status[value="In Progress"] {
+    --color: orange;
+}
+
+#add-task-container {
+    border-top: 1px solid rgb(128, 128, 128);
+    margin-top: 1%;
+    padding: 1%;
+}
+
+#todo-list {
+    background-color: rgb(63, 63, 63);
+    border: 2px solid blue;
+    width: 90vw;
+    margin: auto auto 2%;
+    padding: 2%;
+}
+
+#todo-tasks {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#todo-tasks tbody td, #todo-tasks thead th {
+    margin: 0;
+    padding: 1.5% 0;
+}
+
+#todo-tasks * tr {
+    border-bottom: 1px solid rgb(128, 128, 128);
+}
+
+#todo-tasks thead th {
+    border-bottom: 2px solid white;
+}
+
+#todo-tasks thead th:nth-child(1) {
+    width: 5%;
+}
+
+#todo-tasks thead th:nth-child(4) {
+    width: 20%;
+}
+
+#todo-tasks thead th:nth-child(5), #todo-tasks thead th:nth-child(6) {
+    width: 8%;
+}

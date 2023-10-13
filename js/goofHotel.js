@@ -2,7 +2,7 @@ import {Html} from "./libraries/main.js";
 
 const inputForm = document.querySelector("form");
 /**
- * @type {HTMLElement[]}
+ * @type {NodeListOf<HTMLElementTagNameMap[string]>}
  */
 const inputElements = inputForm.querySelectorAll("input");
 const bookingTable = document.getElementById("booking-table").children[1];
@@ -59,7 +59,7 @@ class UI {
                 <button class="reservation-orange">?</button>
                 <button class="reservation-red">X</button>
             </td>
-        `});
+        `}, undefined);
         
         Controller.displayMessage("New Reservation added");
 

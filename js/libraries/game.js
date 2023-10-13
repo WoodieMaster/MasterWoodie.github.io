@@ -1,4 +1,4 @@
-import { Html, Vector2, Collider, BoxCollider, CircleCollider } from "./main.js";
+import { Vector2, Collider, BoxCollider, CircleCollider } from "./main.js";
 
 /**
  * Static class that handles the Game Loop 
@@ -147,17 +147,17 @@ export class GameObject {
         this.isStatic = isStatic;
         this.group = group;
 
-        if(colliderData != undefined) {
+        if(colliderData !== undefined) {
             let colliderOffset = colliderData.offset;
             let colliderSize = colliderData.size;
-            if(colliderOffset == undefined) colliderOffset = Vector2.zero();
+            if(colliderOffset === undefined) colliderOffset = Vector2.zero();
             switch(colliderData.type | 0) {
                 case 0:
-                    if(colliderSize == undefined) colliderSize = size;
+                    if(colliderSize === undefined) colliderSize = size;
                     this.collider = new BoxCollider(colliderSize, position, colliderOffset);
                     break;
                 case 1:
-                    if(colliderSize == undefined) colliderSize = size.magnitude();
+                    if(colliderSize === undefined) colliderSize = size.magnitude();
                     this.collider = new CircleCollider(colliderSize, position, colliderOffset);
                     break;
             }
@@ -240,11 +240,6 @@ export class Camera {
      * @type {Vector2}
      */
     static movementSpeed;
-    /**
-     * value that the y value needs to be multiplied to stay the same as x
-     * @type {number}
-     */
-    static screenRatio;
 
     /**
      * sets all the required information for the camera

@@ -358,3 +358,6 @@ mutationObserver.observe(document, {attributes: true, childList: true, subtree: 
 
 document.querySelectorAll("input[type=list]").forEach((el) => addListInput(el));
 document.querySelectorAll("ul.switch-list").forEach((el) => SwitchList.add(el));
+
+//Stuff
+console.log("%cGoof %cBall","font-size:3rem","color:red");

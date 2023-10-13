@@ -46,7 +46,7 @@ const POINTS_PER_UNIT = .05;
 class Platform extends GameObject {
     //constants
     static SIZE = new Vector2(50, 15);
-    static HTML = Html.createElement("div",{attributes:{class:"platform"}});
+    static HTML = Html.createElement("div",{attributes:{class:"platform"}}, undefined);
     static SPACING_Y = 30;
     static MOVEMENT_SPEED = 3;
     static PLATFORM_START_Y = 50;
@@ -130,7 +130,7 @@ class Platform extends GameObject {
      * @param {Vector2} position position of the platform
      * @param {boolean} isMoving whether the platform is moving
      */
-    constructor(type, position, isMoving) {
+    constructor(type, position, isMoving = false) {
         const html = Platform.HTML.cloneNode(true);
         gameContainer.appendChild(html);
         super(html, position, Platform.SIZE, {}, true, "Platform");
@@ -179,8 +179,7 @@ class Platform extends GameObject {
         this.html.remove();
     }
 
-    /**
-     * - called when player touches the platform
+    /** - called when player touches the platform
      * - returned numbers: 
      * - -1: death
      * - 0: no jump
@@ -191,7 +190,7 @@ class Platform extends GameObject {
     onPlayerTouch() {
         let platformData = Platform.platformTypes[this.type];
 
-        if(platformData.jump_event != undefined) {
+        if(platformData.jump_event !== undefined) {
             //-1: remove platform, 0: set random platform type
             switch(platformData.jump_event) {
                 case -1:
@@ -223,8 +222,10 @@ class Platform extends GameObject {
      */
     static addPlatforms() {
         function createPlatform() {
-
-            let currentSpawnTypeData = null;
+            /**
+             * @type {{min_score:number, spawn_chances:number[], none:number}}
+             */
+            let currentSpawnTypeData = {min_score:0, spawn_chances:[0], none:0};
             for(let i = Platform.spawnData.length-1; i >= 0; i--) {
                 if(Platform.spawnData[i].min_score < score) {
                     currentSpawnTypeData = Platform.spawnData[i];
@@ -301,10 +302,10 @@ class Platform extends GameObject {
         Platform.defaultPlatform = data.default_platform;
         Platform.spawnMoverData = data.moving_platform_chances;
 
-        if(data.gravity != undefined) gravity = data.gravity;
+        if(data.gravity !== undefined) gravity = data.gravity;
         else gravity = JUMP_GRAVITY;
 
-        highScoreValue.innerHTML = highScores[gameMode];
+        highScoreValue.innerHTML = highScores[gameMode].toString();
 
         localStorage.setItem("lastGamemode", Platform.gameMode);
     }
@@ -330,6 +331,7 @@ function setupGame() {
     Camera.setPosition(PLAYER_START_POSITION.copy());
     Platform.setup();
     new Platform(Platform.defaultPlatform, Vector2.zero());
+    // noinspection StatementWithEmptyBodyJS
     while(Platform.addPlatforms());
 
     unpause();
@@ -345,6 +347,7 @@ function gameTick() {
     if(player.position.y > Camera.position.y) {
         Camera.moveTo(player.position);
         updateScore();
+        // noinspection StatementWithEmptyBodyJS
         while(Platform.addPlatforms());
         gameContainer.style.backgroundPosition = `0 ${Camera.position.y / 2}px`;
     }
@@ -411,7 +414,7 @@ function setupScore() {
 function updateScore() {
     let currentScore = Math.floor((player.position.y - PLAYER_START_POSITION.y) * POINTS_PER_UNIT);
     score = Math.max(currentScore, score);
-    scoreDisplay.innerText = score;
+    scoreDisplay.innerText = score.toString();
 
     if(score > highScores[Platform.gameMode]) {
         highScores[Platform.gameMode] = score;
@@ -433,7 +436,7 @@ function unpause() {
 
 function storeData() {
     localStorage.setItem("highScores", JSON.stringify(highScores));
-    localStorage.setItem("lastScore", score);
+    localStorage.setItem("lastScore", score.toString());
 }
 
 function load() {
@@ -453,11 +456,11 @@ function load() {
 
         Platform.platformTypes = data.platforms;
 
-        let listItemString = gameModeNames.reduce((value, key) => value += ", " + key);
+        let listItemString = gameModeNames.reduce((value, key) => value + ", " + key);
         gameModeInput.setAttribute("data-list-items", listItemString);
         gameModeInput.setAttribute("value", Platform.gameMode);
         gameModeInput.value = Platform.gameMode;
-        gameModeNames.forEach(name => {if(highScores[name] == undefined) {highScores[name] = 0}});
+        gameModeNames.forEach(name => {if(highScores[name] === undefined) {highScores[name] = 0}});
         
         GameLoop.setup(gameTick, 30);
         Camera.setup(gameContainer, PLAYER_START_POSITION.copy(), new Vector2(0,150), new Vector2(0,Infinity), new Vector2(1,.5));
@@ -485,8 +488,8 @@ function menu() {
     setTutorialVisibility(false);
     GameLoop.stop();
     activeGame = false;
-    highScoreValue.innerHTML = highScores[Platform.gameMode];
-    scoreDisplay.innerText = score;
+    highScoreValue.innerHTML = highScores[Platform.gameMode].toString();
+    scoreDisplay.innerText = score.toString();
 }
 
 /**
@@ -498,7 +501,7 @@ function setTutorialVisibility(mode) {
     else tutorialText.style.display = "none";
 }
 
-//edtable variables
+//editable variables
 /**
  * @type {GameObject}
  */
@@ -540,16 +543,16 @@ Input.addKeyDownEvent(" ", () => {
     else unpause();
 });
 Input.addKeyDownEvent("ArrowRight", () => {
-    if(tutorialOpened) tutorialText.setAttribute("data-switch-idx", (parseInt(tutorialText.getAttribute("data-switch-idx")) + 1) || 0);
+    if(tutorialOpened) tutorialText.setAttribute("data-switch-idx", ((parseInt(tutorialText.getAttribute("data-switch-idx")) + 1) || 0).toString());
 });
 Input.addKeyDownEvent("ArrowLeft", () => {
-    if(tutorialOpened) tutorialText.setAttribute("data-switch-idx", (parseInt(tutorialText.getAttribute("data-switch-idx")) - 1) || 0);
+    if(tutorialOpened) tutorialText.setAttribute("data-switch-idx", ((parseInt(tutorialText.getAttribute("data-switch-idx")) - 1) || 0).toString());
 });
 Input.addKeyDownEvent("d", () => {
-    if(tutorialOpened) tutorialText.setAttribute("data-switch-idx", (parseInt(tutorialText.getAttribute("data-switch-idx")) + 1) || 0);
+    if(tutorialOpened) tutorialText.setAttribute("data-switch-idx", ((parseInt(tutorialText.getAttribute("data-switch-idx")) + 1) || 0).toString());
 });
 Input.addKeyDownEvent("a", () => {
-    if(tutorialOpened) tutorialText.setAttribute("data-switch-idx", (parseInt(tutorialText.getAttribute("data-switch-idx")) - 1) || 0);
+    if(tutorialOpened) tutorialText.setAttribute("data-switch-idx", ((parseInt(tutorialText.getAttribute("data-switch-idx")) - 1) || 0).toString());
 });
 
 pauseMenu.querySelector("#button-resume").addEventListener("click", () => unpause());
