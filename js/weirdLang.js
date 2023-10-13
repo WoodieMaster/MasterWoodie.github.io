@@ -79,7 +79,7 @@ class Token {
     value;
     
     /**
-     * @param {string} type 
+     * @param {number} type
      * @param {string | number} value 
      */
     constructor(type, value) {
@@ -96,7 +96,7 @@ class Token {
     }
 
     /**
-     * @param {string} type 
+     * @param {number} type
      * @param {string | number} value
      * @returns {boolean}
      */
@@ -121,8 +121,9 @@ class Token {
         function error(msg, line) {
             msg += ` at line ${line}`;
 
-            console.error(msg);
             Console.error(msg);
+
+            throw new Error(msg);
         }
 
         varibleNames.length = 0;
@@ -136,25 +137,20 @@ class Token {
                 commands.push(Token.commandFromString(lines[i]));
             }catch (e) {
                 error(e, i+1);
-                return;
             }
         }
 
         for(let i = commands.length-1; i >= 0; i--) {
             let command = commands[i];
             
-            if(command.length === 0) {
-                commands.splice(i, 1);
-                continue;
-            }
+            if(command.length === 0) commands.splice(i, 1);
         }
 
-        for(let command of commands) {
+        for(let i = 0; i < lines.length; i++)  {
             try {
-                Token.improveVariables(command);
+                Token.improveVariables(commands[i]);
             }catch (e) {
                 error(e, i+1);
-                return;
             }
         }
 
@@ -164,7 +160,6 @@ class Token {
     /**
      * creates a list of tokens base on the given string
      * @param {string} line
-     * @param {number} idx
      * @returns {Token[]} list of tokens
      */
     static commandFromString(line) {
@@ -193,6 +188,7 @@ class Token {
             }
 
             if(isWhitespace(char)) {                
+                // noinspection StatementWithEmptyBodyJS
                 while(isWhitespace(advance()));
                 retrieve();
 
@@ -213,7 +209,7 @@ class Token {
             if(char === STRING_INDICATOR) {
                 currentValue = "";
 
-                while(advance() && char != STRING_INDICATOR) {
+                while(advance() && char !== STRING_INDICATOR) {
                     if(char === "\\") {
                         advance();
                         switch(char) {
@@ -327,13 +323,8 @@ class Token {
 
             if(tokens[i].type === TokenType.CONSTANT) {
                 parseConstant(tokens, i);
-                continue;
             }
         }
-    }
-
-    static orderTokens(tokens) {
-        
     }
 }
 
@@ -502,24 +493,24 @@ function deString(string) {
     return '"' + string.replace("\n", "\\n").replace("\"", "\\\"") + '"';
 }
 
-runButton.addEventListener("click", e => {
+runButton.addEventListener("click", () => {
     Console.clear();
     let commands = Token.parseString(input.value);
     printTokenText(commands);
     printTokenList(commands);
 });
-clearButton.addEventListener("click", e => {
+clearButton.addEventListener("click", () => {
     Console.clear();
 });
-fileInput.addEventListener("change", async e => {
+fileInput.addEventListener("change", async () => {
     let file = fileInput.files[0];
     let fr = new FileReader();
     
     if(file == null) return;
 
-    fr.onload = () =>{
-      input.value = fr.result;
+    fr.onload = () => {
+        if(fr.result instanceof String) input.value = fr.result;
     }
     fr.readAsText(file);
 });
-fileUploadContainer.addEventListener("click", e => fileInput.click());
+fileUploadContainer.addEventListener("click", () => fileInput.click());

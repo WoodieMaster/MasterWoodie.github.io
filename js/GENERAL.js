@@ -58,8 +58,6 @@ function setNavBar(data) {
 
         navList.appendChild(newItem);
     });
-
-    navBar = navBar.children[0];
 }
 
 fetch("json/navBar.json").then((response) => {
@@ -208,7 +206,7 @@ const listInputChangedEvent = new CustomEvent("valueChanged", {
 */
 let activeListInput = null;
 /**
- * whether or not the html contains a InputList element
+ * whether the html contains a InputList element
  * @type {boolean}
  */
 let hasInputListElement = false;
@@ -256,8 +254,8 @@ function updateListInput() {
     }
 
 
-    activeListInput.style.borderBottomLeftRadius = 0;
-    activeListInput.style.borderBottomRightRadius = 0;
+    activeListInput.style.borderBottomLeftRadius = "0";
+    activeListInput.style.borderBottomRightRadius = "0";
     let borderRadius = inputStyle.borderRadius;
     inputListElement.style.borderBottomLeftRadius = borderRadius;
     inputListElement.style.borderBottomRightRadius = borderRadius;
@@ -287,8 +285,7 @@ function setupListInput(el) {
 }
 
 function updateActiveInputList(idx) {
-    let value = getListItems(activeListInput)[idx==null?0:idx];
-    activeListInput.value = value;
+    activeListInput.value = getListItems(activeListInput)[idx == null ? 0 : idx];
     activeListInput.dispatchEvent(listInputChangedEvent);
 }
 

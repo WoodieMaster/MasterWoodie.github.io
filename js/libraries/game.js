@@ -86,13 +86,14 @@ export class Time {
         Time.lastUpdate = Date.now();
     }
 
-    /**
+/*    /**
      * calculates the FPS
      * @returns {number}
-     */
+     *
     static getFPS() {
         return 1000 / Time.deltaTime;
     }
+ */
 }
 
 export class GameObject {

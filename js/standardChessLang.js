@@ -33,10 +33,8 @@ let tapeIdx = 0;
 let inputLength = 0;
 
 class TokenType {
-    static MOVE = 0;
     static CASTLE = 1;
     static GAME_END = -1;
-    static PAWN_PROMOTION = 2;
 }
 
 class Piece {
@@ -58,13 +56,15 @@ class Piece {
         if(string.length === 1) return Piece.pieceCharacters.indexOf(string);
     }
 
+
     /**
      * @returns {string | undefined}
      * @param {number}number
-     */
+
     static getString(number) {
         return Piece.pieceCharacters[number];
     }
+     */
 }
 
 class Token {
@@ -82,14 +82,15 @@ class Token {
      */
     value;
 
+
     /**
      * @return {boolean}
      * @param {Token}other
-     */
+
     equals(other) {
         return this.value === other.value;
     }
-
+     */
     /**
      * @param {number} type
      * @param {string}value
@@ -153,6 +154,7 @@ class Token {
         }
 
         while(advance()) {
+            // noinspection StatementWithEmptyBodyJS
             while(isWhitespace(advance()));
             if(isWhitespace(retrieve())) advance();
 
@@ -322,10 +324,10 @@ class Console {
     /**
      * 
      * @param {any} msg
-     */
     static log(msg) {
         outputElement.value += msg+"\n";
     }
+     */
 }
 
 function startExecution() {
@@ -373,13 +375,10 @@ function runCode() {
 
         if(token === undefined) runtimeError("No token defined");
 
-        switch (token.type) {
-            case TokenType.MOVE:
-                return token;
-            case TokenType.PAWN_PROMOTION:
-                return MoveToken.from(token);
-            default: runtimeError("Wrong token type");
-        }
+        if(token instanceof MoveToken) return token;
+        if(token instanceof PawnPromotionToken) return MoveToken.from(token);
+
+        runtimeError("Wrong token type");
     }
 
     function getNumberParam() {
@@ -477,12 +476,11 @@ function runCode() {
 
             if(instruction.type === TokenType.GAME_END) break;
 
-            if(instruction.type === TokenType.MOVE) {
-                evaluateMove(instruction);
-            }else if(instruction.type === TokenType.PAWN_PROMOTION) {
+            if(instruction instanceof MoveToken) evaluateMove(instruction);
+            else if(instruction instanceof PawnPromotionToken) {
                 evaluateMove(MoveToken.from(instruction));
                 continue;
-            }else if(instruction.type === TokenType.CASTLE) {
+            } else if(instruction.type === TokenType.CASTLE) {
                 if(instruction.value.length === 5) {
                     let skip = 0;
                     while(retrieve()) {

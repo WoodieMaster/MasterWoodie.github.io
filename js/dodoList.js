@@ -54,6 +54,7 @@ class Controller {
      */
     static addTask(task, isNew = true) {
         let isEdited = false;
+        // noinspection HtmlWrongAttributeValue
         const row = Html.createElement("tr", {innerHTML: `
             <td>${task.id}</td>
             <td><input type="text" readonly value="${task.name}" class="task-data"></td>
@@ -117,7 +118,7 @@ class Controller {
     static getNewTask() {
         let name = inputElements.name.value;
 
-        if(name.length == 0) {
+        if(name.length === 0) {
             UI.showAlert("Please choose a name for the task", inputContainer);
             return null;
         }
@@ -176,9 +177,8 @@ class Task {
     id;
     
     /**
-     * @param {string} name 
+     * @param {string} name
      * @param {string} description
-     * @param {number} id
      */
     constructor(name, description) {
         this.name = name;

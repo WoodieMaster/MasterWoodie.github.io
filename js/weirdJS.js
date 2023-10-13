@@ -57,15 +57,15 @@ function calculateOutput() {
   output.style.removeProperty("border-color");
 }
 
-fileUploadContainer.addEventListener("click", e => fileInput.click());
-fileInput.addEventListener("change", async e => {
+fileUploadContainer.addEventListener("click", () => fileInput.click());
+fileInput.addEventListener("change", async () => {
     let file = fileInput.files[0];
     let fr = new FileReader();
     
     if(file == null) return;
 
-    fr.onload = () =>{
-      input.value = fr.result;
+    fr.onload = () => {
+        if(fr.result instanceof String) input.value = fr.result;
     }
     fr.readAsText(file);
 });

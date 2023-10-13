@@ -1,5 +1,5 @@
-import {BoxCollider, Collider, Html, Input, Vector2} from "./libraries/main.js";
-import {GameLoop, Time, GameObject, Camera} from "./libraries/game.js";
+import {Html, Input, Vector2} from "./libraries/main.js";
+import {GameLoop, GameObject, Camera} from "./libraries/game.js";
 
 //HTML References
 const gameContainer = document.getElementById("game");
@@ -50,10 +50,6 @@ class Platform extends GameObject {
     static SPACING_Y = 30;
     static MOVEMENT_SPEED = 3;
     static PLATFORM_START_Y = 50;
-    /**
-     * the minimum x distance between adjacent Platforms 
-     */
-    static CLOSEST_X_DST = 10;
     /**
      * how many platforms can be skipped with a single jump
      */
@@ -137,7 +133,7 @@ class Platform extends GameObject {
 
         this.isMoving = isMoving;
 
-        this.html.setAttribute("data-platform-type", type);
+        this.html.setAttribute("data-platform-type", type.toString());
 
         if(isMoving) {
             this.data.movementDirection = -1;

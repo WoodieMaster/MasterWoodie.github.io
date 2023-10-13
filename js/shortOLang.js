@@ -33,7 +33,7 @@ let codeIsExecuting = false;
  */
 function popFromStack() {
     let val = stack.pop();
-    if(val == undefined) throw "There is no value to pop from stack";
+    if(val === undefined) throw "There is no value to pop from stack";
     return val;
 }
 const operators = {
@@ -295,11 +295,12 @@ class Token {
      * @param {string} type 
      * @param {string | number} value
      * @returns {boolean}
-     */
-    is(type, value) {
-        return this.type === type && this.value === value;
-    }
 
+    is(type, value) {
+        // noinspection EqualityComparisonWithCoercionJS
+        return this.type == type && this.value === value;
+    }
+     */
     /**
      * @param {string} string
      */
@@ -314,7 +315,6 @@ class Token {
         }catch (e) {
             displayError(e);
             Token.tokens.length = 0;
-            return;
         }
     }
 
@@ -346,11 +346,11 @@ class Token {
 
             if(char === SpecialCharacter.MARKER) {
                 while(advance() !== SpecialCharacter.END) {
-                    if(char == undefined) parsingError("Marker has no defined ending");
+                    if(char === undefined) parsingError("Marker has no defined ending");
                     
                     currentValue += char;
                 }
-                if(marker[currentValue] != undefined) parsingError(`The marker "${currentValue}" has already been set`);
+                if(marker[currentValue] !== undefined) parsingError(`The marker "${currentValue}" has already been set`);
 
                 marker[currentValue] = Token.tokens.length;
                 continue;
@@ -358,7 +358,7 @@ class Token {
 
             if(char === SpecialCharacter.CODE_BLOCK) {
                 while(advance() !== SpecialCharacter.END) {
-                    if(char == undefined) parsingError("Code Block has no defined error");
+                    if(char === undefined) parsingError("Code Block has no defined error");
                     currentValue = "";
 
                     if(char === SpecialCharacter.STRING) {
@@ -404,7 +404,7 @@ class Token {
 
                     if(char === SpecialCharacter.MARKER) {
                         while(advance() !== SpecialCharacter.END) {
-                            if(char == undefined) parsingError(`String isn't stopped`);("Marker has no defined ending");
+                            if(char === undefined) parsingError(`String isn't stopped`);("Marker has no defined ending");
                             
                             currentValue += char;
                         }
@@ -414,10 +414,11 @@ class Token {
                     }
 
                     if(isWhitespace(char)) {
+                        // noinspection StatementWithEmptyBodyJS
                         while(isWhitespace(advance()));
                         idx--;
                         continue;
-                    };
+                    }
 
                     parsingError(`Invalid character ${char}`);
                 }
@@ -427,6 +428,7 @@ class Token {
             while(!SpecialCharacter.TEXT_BREAK.includes(char)) {
                 if(char === SpecialCharacter.COMMENT) {
                     if(advance() === SpecialCharacter.COMMENT) {
+                        // noinspection StatementWithEmptyBodyJS
                         while(advance() && char !== '\n');
                         if(!char) break;
                     }else {
@@ -437,7 +439,7 @@ class Token {
 
                 if(char === SpecialCharacter.ESCAPE) {
                     if(!advance()) parsingError(`No escaped character defined`);
-                };
+                }
                 
                 currentValue += char;
                 
@@ -465,13 +467,16 @@ class Console {
         outputElement.style.color = "red";
     }
 
+/*
     /**
      * 
      * @param {string} msg 
-     */
+
     static log(msg) {
         outputElement.value += msg+"\n";
     }
+
+ */
 }
 
 function startExecution() {
@@ -526,7 +531,7 @@ function runCode() {
             }
     
             if(instruction.type === TokenType.JUMP) {
-                if(marker[instruction.value] == undefined) runtimeError(`No marker for "${instruction.value}" detected`);
+                if(marker[instruction.value] === undefined) runtimeError(`No marker for "${instruction.value}" detected`);
                 instructionIdx = marker[instruction.value];
             }
     
@@ -590,7 +595,7 @@ function isDigit(char) {
 
 /**
  * @param {Token[]} tokens
- */
+
 function printTokenList(tokens) {
     if(tokens == null) return;
     
@@ -613,10 +618,11 @@ function printTokenList(tokens) {
 /**
  * @param {string} string
  * @returns {string}
- */
+
 function deString(string) {
     return '"' + string.replace("\n", "\\n").replace("\"", "\\\"") + '"';
 }
+*/
 
 /**
  * @param {number} type 0: no Input, 1: single character, 2: string 
@@ -709,7 +715,6 @@ document.addEventListener("keydown", e => {
             if(isDigit(key) || (key === '-' && inputLength === 0) || (key === '.' && !outputElement.value.substring(outputElement.value.length-inputLength, outputElement.value.length).includes('.'))) {
                 inputLength++;
                 outputElement.value += key;
-                return;
             }
         }
     }

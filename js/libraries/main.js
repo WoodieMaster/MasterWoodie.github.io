@@ -6,7 +6,7 @@ export class Html {
      * @param {HTMLElement | undefined} parent the parent to which the element will be appended to
      * @return {HTMLElement}
      */
-    static createElement(type, data, parent ) {
+    static createElement(type, data= undefined, parent = undefined) {
         const element = document.createElement(type);
         
         if(data == null) return element;
@@ -56,22 +56,24 @@ export class Vector2 {
         return Math.sqrt(this.x ** 2 + this.y ** 2);
     }
 
+/*
     /**
      * returns the magnitude/length of the vector, without taking the root, making it more efficient
      * @returns {number}
-     */
+
     sqrMagnitude() {
         return this.x * this.x + this.y * this.y;
     }
-
+*/
+/*
     /**
      * changes the vector to have a magnitude/length of 1
      * @returns {Vector2} that Vector
-     */
+     *
     normalize() {
         return this.divide(this.magnitude());
     }
-
+*/
     /**
      * returns a copy of this vector
      * @returns {Vector2}
@@ -110,13 +112,15 @@ export class Vector2 {
         return `[${this.x}|${this.y}]`;
     }
 
+/*
     /**
      * removes that object
-     */
+     *
     remove() {
         delete this.x;
         delete this.y;
     }
+*/
 
     /**
      * adds another vector / number to this vector
@@ -169,11 +173,12 @@ export class Vector2 {
         return this;
     }
 
+/*
     /**
      * divides this vector by another vector / number
      * @param {Vector2 | number} other the other value
      * @returns {Vector2} this vector
-     */
+
     divide(other) {
         if(typeof other === 'number') {
             this.x /= other;
@@ -185,7 +190,7 @@ export class Vector2 {
 
         return this;
     }
-
+*/
     /**
      * adds to vectors together
      * @param {Vector2} a 
@@ -220,12 +225,13 @@ export class Vector2 {
         }
     }
 
+/*
     /**
      * multiplies two vectors | one vector with a number
      * @param {Vector2} a
      * @param {Vector2 | number} b
      * @returns {Vector2}
-     */
+
     static multiply(a,b) {
         if(typeof b === 'number') {
             return new Vector2(a.x * b, a.y * b);
@@ -234,10 +240,11 @@ export class Vector2 {
         }
     }
 
+
     /**
      * creates a vector of the value [0,1] or the direction up
      * @returns {Vector2}
-     */
+
     static up() {
         return new Vector2(0,1);
     }
@@ -245,7 +252,7 @@ export class Vector2 {
     /**
      * creates a vector of the value [0,-1] or the direction down
      * @returns {Vector2}
-     */
+
     static down() {
         return new Vector2(0,-1);
     }
@@ -253,7 +260,7 @@ export class Vector2 {
     /**
      * creates a vector of the value [-1,0] or the direction left
      * @returns {Vector2}
-     */
+
     static left() {
         return new Vector2(-1, 0);
     }
@@ -261,11 +268,11 @@ export class Vector2 {
     /**
      * creates a vector of the value [1,0] or the direction right
      * @returns {Vector2}
-     */
+
     static right() {
         return new Vector2(1,0);
     }
-
+*/
     /**
      * creates a vector of the value [1,1]
      * @returns {Vector2}
@@ -287,11 +294,11 @@ export class Vector2 {
      * @param {Vector2} a 
      * @param {Vector2} b 
      * @returns {number}
-     */
+
     static distance(a, b) {
         return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
     }
-
+*/
     /**
      * calculates the x and y distances between two vectors
      * @param {Vector2} a 
@@ -308,7 +315,7 @@ export class Vector2 {
      * @param {Vector2} b 
      * @returns {number}
      */
-    static sqrdst(a,b) {
+    static sqrDistance(a, b) {
         return Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2);
     }
 
@@ -317,11 +324,11 @@ export class Vector2 {
      * @param {Vector2} a 
      * @param {Vector2} b 
      * @returns {boolean}
-     */
+
     static equals(a,b) {
         return a.x === b.x && a.y === b.y;
     }
-
+*/
     /**
      * returns a new vector containing the smallest x and the smallest y value of the 2 given vectors
      * @param {Vector2} a 
@@ -406,7 +413,7 @@ export class Collider {
         if(this.type === other.type) {
             if(this.type === 0) return thisPos.x - thisSize.x < otherPos.x + otherSize.x && thisPos.y - thisSize.y < otherPos.y + otherSize.y && thisPos.x + thisSize.x > otherPos.x - otherSize.x && thisPos.y + thisSize.y > otherPos.y - otherSize.y;
             
-            if(this.type === 1) return Vector2.sqrdst(thisPos, otherPos) < (thisSize + otherSize) ** 2;
+            if(this.type === 1) return Vector2.sqrDistance(thisPos, otherPos) < (thisSize + otherSize) ** 2;
             
             return false;
         }
@@ -553,7 +560,7 @@ export class Input {
      * checks if the given MouseButton is pressed
      * @param {number} button the button you searched for
      * @returns {boolean}
-     */
+
     static getMouseButton(button) {
         return Input.mouse.buttons.includes(button);
     }
@@ -561,29 +568,30 @@ export class Input {
     /**
      * checks if at least one of the given keys is pressed
      * @param {number[]} buttons
-     */
+
     static getMouseButtonGroup(buttons) {
         return buttons.some(button => Input.getMouseButton(button));
     }
-
+*/
     /**
      * adds an event that triggers when the given key is pressed
      * @param {string} key the key to check for
-     * @param {()=>{}} callbackfn the function executed when the key is pressed
+     * @param {()=>{}} callback the function executed when the key is pressed
      */
-    static addKeyDownEvent(key, callbackfn) {
+    static addKeyDownEvent(key, callback) {
         if(Input.keyEvents[key] == null) Input.keyEvents[key] = [];
         
-        Input.keyEvents[key].push(callbackfn);
+        Input.keyEvents[key].push(callback);
     }
 }
 
+/*
 export class Help {
-    /**
+
      * @param {string} a 
      * @param {string} b
      * @returns {number} 
-     */
+
     static compareGermanTextString(a,b) {
         const string = "aäbcdefghijklmnoöpqrsßtuüvwxyz";
         
@@ -603,12 +611,14 @@ export class Help {
         return 0;
     }
 
-    /**
-     * @param {number} min 
-     * @param {number} max 
-     * @returns {number}
-     */
+
+     @param {number} min
+     @param {number} max
+     @returns {number}
+
+
     static random(min, max) {
         return Math.floor(Math.random() * (max - min) + min);
     }
 }
+*/

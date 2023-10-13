@@ -126,8 +126,8 @@ document.getElementById("clear").addEventListener("click", () => {
     codeFinished();
     output.value = "";
 });
-fileUploadContainer.addEventListener("click", e => fileInput.click());
-fileInput.addEventListener("change", async e => {
+fileUploadContainer.addEventListener("click", () => fileInput.click());
+fileInput.addEventListener("change", async () => {
     let file = fileInput.files[0];
     let fr = new FileReader();
     
@@ -148,7 +148,7 @@ document.addEventListener("keydown", (e) => {
             charCode = 10;
             break;
         default:
-            if(e.key.length == 1) charCode = e.key.charCodeAt(0);
+            if(e.key.length === 1) charCode = e.key.charCodeAt(0);
             else return;
             break;
     }
