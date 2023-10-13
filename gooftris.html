@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TetrisClone | Wood Games</title>
+    <link rel="stylesheet" href="css/GENERAL.css">
+    <link rel="stylesheet" href="css/gooftris.css">
+    <script src="js/GENERAL.js" defer type="module"></script>
+    <script src="js/gooftris.js" defer type="module"></script>
+    <link rel="shortcut icon" href="IMG/Favicon.png" type="image/x-icon">
+</head>
+<body>
+    <div id="game">
+        <div id="loading-screen"></div>
+
+        <div id="start" class="main-load standardContentBox">
+            <p>Tetris</p>
+            <button>Start</button>
+        </div>
+
+        <p id="hold-text">Hold:</p>
+        <div id="hold" class="main-load"></div>
+
+        <p id="next-shape-text">Next Shape:</p>
+        <div id="next-shape" class="main-load"></div>
+
+        <div id="displays">
+            <p id="high-score" class="centered-text main-load standardContentBox">High Score:<br>0</p>
+            <p id="time" class="centered-text standardContentBox main-load">Time:<br>0:00</p>
+            <p id="points" class="centered-text standardContentBox main-load">Points:<br>0</p>
+        </div>
+
+        <div id="board" class="main-load standardContentBox">
+        </div>
+    </div>
+</body>
+</html>
