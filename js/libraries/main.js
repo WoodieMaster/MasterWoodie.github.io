@@ -244,7 +244,7 @@ export class Vector2 {
     /**
      * creates a vector of the value [0,1] or the direction up
      * @returns {Vector2}
-
+    */
     static up() {
         return new Vector2(0,1);
     }
@@ -252,7 +252,7 @@ export class Vector2 {
     /**
      * creates a vector of the value [0,-1] or the direction down
      * @returns {Vector2}
-
+    */
     static down() {
         return new Vector2(0,-1);
     }
@@ -260,7 +260,7 @@ export class Vector2 {
     /**
      * creates a vector of the value [-1,0] or the direction left
      * @returns {Vector2}
-
+     * */
     static left() {
         return new Vector2(-1, 0);
     }
@@ -268,11 +268,11 @@ export class Vector2 {
     /**
      * creates a vector of the value [1,0] or the direction right
      * @returns {Vector2}
-
+     */
     static right() {
         return new Vector2(1,0);
     }
-*/
+
     /**
      * creates a vector of the value [1,1]
      * @returns {Vector2}
@@ -294,11 +294,11 @@ export class Vector2 {
      * @param {Vector2} a 
      * @param {Vector2} b 
      * @returns {number}
-
+     */
     static distance(a, b) {
         return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
     }
-*/
+
     /**
      * calculates the x and y distances between two vectors
      * @param {Vector2} a 
@@ -494,7 +494,7 @@ export class Input {
 
     /**
      * stores all the events that will be executed when the key is pressed
-     * @type {{[key:string]:[()=>{}]}}
+     * @type {{[key:string]:[(e: KeyboardEvent)=>{}]}}
      */
     static keyEvents = {};
 
@@ -511,7 +511,7 @@ export class Input {
         document.addEventListener("keydown", e => {
             if(!Input.getKey(e.key)) {
                 Input.keys.push(e.key);
-                Input.keyEvents[e.key]?.forEach(event => event());
+                Input.keyEvents[e.key]?.forEach(event => event(e));
             }
         });
         
@@ -560,7 +560,7 @@ export class Input {
      * checks if the given MouseButton is pressed
      * @param {number} button the button you searched for
      * @returns {boolean}
-
+    */
     static getMouseButton(button) {
         return Input.mouse.buttons.includes(button);
     }
@@ -568,15 +568,15 @@ export class Input {
     /**
      * checks if at least one of the given keys is pressed
      * @param {number[]} buttons
-
+    */
     static getMouseButtonGroup(buttons) {
         return buttons.some(button => Input.getMouseButton(button));
     }
-*/
+
     /**
      * adds an event that triggers when the given key is pressed
      * @param {string} key the key to check for
-     * @param {()=>{}} callback the function executed when the key is pressed
+     * @param {(e: KeyboardEvent)=>{}} callback the function executed when the key is pressed
      */
     static addKeyDownEvent(key, callback) {
         if(Input.keyEvents[key] == null) Input.keyEvents[key] = [];

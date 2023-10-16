@@ -28,7 +28,7 @@ h1 {
 
 a {
      color: cyan;
- }
+}
 
 a:visited {
     color: lightblue;
@@ -50,6 +50,15 @@ li {
 
 button {
     color: black;
+}
+
+.text-box {
+    background-color: rgb(37, 37, 37);
+    border: 2px solid blue;
+    width: fit-content;
+    margin: auto auto 2%;
+    padding: 3%;
+    text-align: start;
 }
 
 /*

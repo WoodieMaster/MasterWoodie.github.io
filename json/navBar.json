@@ -9,6 +9,9 @@
         {"content": "./shortOLang.html", "text": "Short O"},
         {"content": "standardChess.html", "text": "Standard Chess"}
     ]},
+    {"type":"dropdown", "text":"Simulations", "content": [
+        {"content": "./physicBalls.html", "text": "Ball Physics"}
+    ]},
     {"type":"link","content": "./weirdJS.html", "text": "JS Converter"},
     {"type":"dropdown", "text":"Other Stuff", "content": [
         {"content": "./todoList.html", "text": "Todo List"},
