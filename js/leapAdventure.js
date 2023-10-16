@@ -301,7 +301,7 @@ class Platform extends GameObject {
         if(data.gravity !== undefined) gravity = data.gravity;
         else gravity = JUMP_GRAVITY;
 
-        highScoreValue.innerHTML = highScores[gameMode].toString();
+        highScoreValue.innerHTML = (highScores[gameMode] || 0).toString();
 
         localStorage.setItem("lastGamemode", Platform.gameMode);
     }
@@ -456,7 +456,9 @@ function load() {
         gameModeInput.setAttribute("data-list-items", listItemString);
         gameModeInput.setAttribute("value", Platform.gameMode);
         gameModeInput.value = Platform.gameMode;
-        gameModeNames.forEach(name => {if(highScores[name] === undefined) {highScores[name] = 0}});
+        gameModeNames.forEach(name => {
+            if(highScores[name] === undefined) highScores[name] = 0
+        });
         
         GameLoop.setup(gameTick, 30);
         Camera.setup(gameContainer, PLAYER_START_POSITION.copy(), new Vector2(0,150), new Vector2(0,Infinity), new Vector2(1,.5));
