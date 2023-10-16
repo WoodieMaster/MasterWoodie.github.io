@@ -1,6 +1,7 @@
 const board = document.getElementById("board");
 const timeDisplay = document.getElementById("time");
 const startDisplay = document.getElementById("start");
+const startDisplayButton = startDisplay.querySelector("button");
 const pointDisplay = document.getElementById("points");
 const highScoreDisplay = document.getElementById("high-score");
 const holdDisplay = document.getElementById("hold");
@@ -629,6 +630,6 @@ document.addEventListener("keydown", event => {
     }
 });
 
-startDisplay.lastElementChild.addEventListener("click", start);
+startDisplayButton.addEventListener("click", start);
 
 load();
