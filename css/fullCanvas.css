@@ -3,6 +3,46 @@ body {
 }
 
 canvas {
-    margin-top: 10vh;
+    inset:0;
+    top: 10vh;
     background-color: white;
+    position: absolute;
+}
+
+form {
+    background-color: rgba(0,0,0, .5);
+    border: 2px solid black;
+    width: 20%;
+    height: fit-content;
+    padding: 1%;
+    margin: 2%;
+    display: block;
+    font-size: .8rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+button {
+    width: 90%;
+    margin: 2% 1%;
+}
+
+form input {
+    min-width: initial;
+    width: 90%;
+    margin: .5% 5% .5% 0;
+    padding: 1% 2%;
+    border-radius: 0;
+    font-size: 80%;
+}
+
+form div {
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr 10fr;
+    width: 100%;
+}
+
+form * {
+    height: fit-content;
 }

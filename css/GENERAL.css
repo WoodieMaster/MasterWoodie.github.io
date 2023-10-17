@@ -78,7 +78,7 @@ form {
     outline: none;
 }
 
-input, select, .input-style-button {    
+input, select, .input-style-button {
     font-size: 1rem;
     min-width: 100%;
     padding: 1% 2%;
@@ -148,7 +148,7 @@ Switch List
     --width: 10%;
     width: var(--width);
     position: absolute;
-    top: calc(50% - var(--height) / 2);
+    /*top: calc(50% - var(--height) / 2);*/
     background-color: white;
 }
 

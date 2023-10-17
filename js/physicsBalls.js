@@ -4,12 +4,41 @@ import {GameLoop} from './libraries/game.js';
 const ctx = document.querySelector("canvas").getContext("2d");
 const fullCircle = Math.PI * 2;
 /**
+ * @type {HTMLInputElement}
+ */
+const frictionInput = document.getElementById("friction");
+/**
+ * @type {HTMLInputElement}
+ */
+const wallBounceInput = document.getElementById("wall_bounce");
+/**
+ * @type {HTMLInputElement}
+ */
+const launchBoostInput = document.getElementById("launchBoost");
+/**
+ * @type {HTMLInputElement}
+ */
+const throwBoostInput = document.getElementById("throwBoost");
+/**
+ * @type {HTMLInputElement}
+ */
+const gXInput = document.getElementById("gX");
+/**
+ * @type {HTMLInputElement}
+ */
+const gYInput = document.getElementById("gY");
+const clearBtn = document.getElementById("clear");
+
+/**
  * @type {PhysicsObject[]}
  */
 const objects = [];
-const GRAVITY = new Vector2(0, 1);
-const FRICTION = .98;
-const WALL_BOUNCE = 1;
+
+const gravity = new Vector2(parseFloat(gXInput.value), parseFloat(gYInput.value));
+let friction = parseFloat(frictionInput.value);
+let wallBounce = parseFloat(wallBounceInput.value);
+let throwBoost = parseFloat(throwBoostInput.value);
+let launchBoost = parseFloat(launchBoostInput.value);
 
 let width = 0
 let height = 0;
@@ -17,6 +46,7 @@ let height = 0;
  * @type {PhysicsObject|undefined}
  */
 let selectedObject = undefined;
+let createObject = true;
 
 /**
  * @abstract
@@ -87,8 +117,8 @@ class PhysicsObject extends Drawable {
      */
     update() {
         if(!this.isStatic) {
-            this.velocity.add(GRAVITY);
-            this.velocity.multiply(FRICTION);
+            this.velocity.add(gravity);
+            this.velocity.multiply(friction);
             this.pos.add(this.velocity);
         }
     }
@@ -178,19 +208,23 @@ function bounceOnEdge(physicsObject) {
 
     if(minPos.x < 0) {
         physicsObject.pos.x = -boundaries[0].x;
-        physicsObject.velocity.x *= -WALL_BOUNCE;
+        physicsObject.velocity.x *= -wallBounce;
     }else if(maxPos.x > width) {
         physicsObject.pos.x = width-boundaries[1].x;
-        physicsObject.velocity.x *= -WALL_BOUNCE;
+        physicsObject.velocity.x *= -wallBounce;
     }
 
     if(minPos.y < 0) {
         physicsObject.pos.y = -boundaries[0].y;
-        physicsObject.velocity.y *= -WALL_BOUNCE;
+        physicsObject.velocity.y *= -wallBounce;
     }else if(maxPos.y > height) {
         physicsObject.pos.y = height-boundaries[1].y;
-        physicsObject.velocity.y *= -WALL_BOUNCE;
+        physicsObject.velocity.y *= -wallBounce;
     }
+}
+
+function removeObjects() {
+    objects.length = 0
 }
 
 /**
@@ -224,56 +258,81 @@ Input.setup();
 window.onresize = updateCanvas;
 updateCanvas();
 
-Input.addKeyDownEvent('c', () => objects.length = 0);
+Input.addKeyDownEvent('c', removeObjects);
 
-document.onmousemove = e => {
-    if(!selectedObject) return;
+document.addEventListener("mousemove", e => {
+    if(!selectedObject || createObject) return;
 
     const mousePos = screenToWorldPos(e.x, e.y);
 
-    selectedObject.velocity.from(mousePos.subtract(selectedObject.pos).multiply(1.5))
+    selectedObject.velocity.from(mousePos.subtract(selectedObject.pos).multiply(throwBoost))
 
     selectedObject.pos.from(screenToWorldPos(e.x, e.y));
+});
 
-    document.onmouseup =  e => {
-        if(e.button !== 0) return;
-
-        selectedObject.isStatic = false;
-        selectedObject = undefined;
-    }
-}
-
-document.onmousedown = e => {
+document.addEventListener("mouseup", e => {
     if(e.button !== 0) return;
+
+    if(createObject) {
+        const mousePos = screenToWorldPos(e.x, e.y)
+        selectedObject.velocity.from(mousePos.subtract(selectedObject.pos).multiply(launchBoost))
+    }
+
+    selectedObject.isStatic = false;
+    selectedObject = undefined;
+})
+
+document.addEventListener("mousedown", e => {
+    if(e.button !== 0 || e.target !== ctx.canvas) return;
 
     let mousePos = screenToWorldPos(e.x, e.y);
     let circle;
 
     if((circle = objects.findLast(el => el.pointCollision(mousePos)))) {
-        selectedObject = circle;
         circle.isStatic = true;
+        selectedObject = circle;
+        createObject = false;
         return;
     }
 
+    createObject = true;
     const color = [
         Math.ceil(Math.random() * 255),
         Math.ceil(Math.random() * 255),
         Math.ceil(Math.random() * 255)
     ]
     circle = new Circle(new Vector2(mousePos.x, mousePos.y), 20, `rgb(${color[0]},${color[1]},${color[2]})`);
-    objects.push(circle);
-
     circle.isStatic = true;
 
-    document.onmouseup =  e => {
-        if(e.button !== 0) return;
-        mousePos = screenToWorldPos(e.x, e.y);
+    selectedObject = circle
+    objects.push(circle);
+});
 
-        circle.velocity.from(mousePos.subtract(circle.pos).multiply(.3))
+frictionInput.addEventListener("change", () =>{
+    friction = parseFloat(frictionInput.value)
+});
 
-        circle.isStatic = false;
-    }
-}
+wallBounceInput.addEventListener("change", () =>{
+    wallBounce = parseFloat(wallBounceInput.value)
+});
+
+launchBoostInput.addEventListener("change", () =>{
+    launchBoost = parseFloat(launchBoostInput.value)
+});
+
+throwBoostInput.addEventListener("change", () =>{
+    throwBoost = parseFloat(throwBoostInput.value)
+});
+
+gXInput.addEventListener("change", () =>{
+    gravity.x = parseFloat(gXInput.value)
+});
+
+gYInput.addEventListener("change", () =>{
+    gravity.y = parseFloat(gYInput.value)
+});
+
+clearBtn.addEventListener("click", removeObjects)
 
 GameLoop.setup(gameTick, 10);
 GameLoop.start();

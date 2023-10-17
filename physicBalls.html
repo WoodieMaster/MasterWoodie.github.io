@@ -14,5 +14,23 @@
 </head>
 <body>
     <canvas></canvas>
+    <form>
+        <label for="friction">Friction:</label>
+        <input id="friction" type="number" value=".98" step=".01">
+        <label for="wall_bounce">Wall Bounce:</label>
+        <input id="wall_bounce" type="number" value="1" step=".01">
+        <label>Gravity:</label>
+        <div>
+            <label for="gX">x</label>
+            <input id="gX" type="number" value="0" step=".1">
+            <label for="gY">y</label>
+            <input id="gY" type="number" value="2" step=".1">
+        </div>
+        <label for="throwBoost">Throw Boost:</label>
+        <input id="throwBoost" type="number" value="1.2" step=".1">
+        <label for="launchBoost">Launch Boost:</label>
+        <input id="launchBoost" type="number" value=".3" step=".1">
+        <button id="clear" type="button">Clear</button>
+    </form>
 </body>
 </html>
