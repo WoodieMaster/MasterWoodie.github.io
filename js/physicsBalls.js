@@ -313,23 +313,23 @@ frictionInput.addEventListener("change", () =>{
 });
 
 wallBounceInput.addEventListener("change", () =>{
-    wallBounce = parseFloat(wallBounceInput.value)
+    wallBounce = parseFloat(wallBounceInput.value) || 0;
 });
 
 launchBoostInput.addEventListener("change", () =>{
-    launchBoost = parseFloat(launchBoostInput.value)
+    launchBoost = parseFloat(launchBoostInput.value) || 0;
 });
 
 throwBoostInput.addEventListener("change", () =>{
-    throwBoost = parseFloat(throwBoostInput.value)
+    throwBoost = parseFloat(throwBoostInput.value) || 0;
 });
 
 gXInput.addEventListener("change", () =>{
-    gravity.x = parseFloat(gXInput.value)
+    gravity.x = parseFloat(gXInput.value) || 0;
 });
 
 gYInput.addEventListener("change", () =>{
-    gravity.y = parseFloat(gYInput.value)
+    gravity.y = parseFloat(gYInput.value) || 0;
 });
 
 clearBtn.addEventListener("click", removeObjects)
