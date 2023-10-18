@@ -3,6 +3,7 @@ const timeDisplay = document.getElementById("time");
 const startDisplay = document.getElementById("start");
 const startDisplayButton = startDisplay.querySelector("button");
 const pointDisplay = document.getElementById("points");
+const levelDisplay = document.getElementById("level");
 const highScoreDisplay = document.getElementById("high-score");
 const holdDisplay = document.getElementById("hold");
 const nextShapeDisplay = document.getElementById("next-shape");
@@ -67,10 +68,12 @@ const shapes = [
 ];
 const shapeOrder = [...shapes.map((el, idx) => idx)];
 const shape = {id: 2, tiles: [[0,0]], position:[0,0]};
+const pointSystem = [20, 50, 150, 600];
+const rowsPerLevel = 1;
 
 let gameMode = 0;
 let startTime;
-let targetFrameTime = 600;
+let targetFrameTime = 700;
 let oldTime;
 let pauseTime = 0;
 let points = 0;
@@ -79,6 +82,8 @@ let holdId = null;
 let hasSwapped = false;
 let currentShapeIdx = shapes.length;
 let nextShapeId = 0;
+let totalClearedRows = 0;
+let level = 1;
 
 function updateTime(time) {
     const seconds = time % 60;
@@ -153,28 +158,33 @@ function drawShape(points, offset, id) {
     });
 }
 
+function updateLevel() {
+    if(totalClearedRows >= level * rowsPerLevel) {
+        level += Math.ceil((totalClearedRows+1 - level * rowsPerLevel) / rowsPerLevel);
+        displayLevels();
+        targetFrameTime = Math.round(700 - 21 * level);
+    }
+}
+
 function clearCompleteRows() {
     let numClearedRows = 0;
-    let bonusPoints = 1;
-    let lastId = -1;
     
     for(let i = 0; i < boardRows; i++) {
-        if(tiles[i].every(element => {
-            if(lastId === element.id) bonusPoints *= 1.05;
-            else lastId = element.id;
-
-            return element.id != null;
-        })) {
+        if(tiles[i].every(element => element.id != null)) {
             numClearedRows++;
             clearRow(i);
         }
     }
 
-    if(numClearedRows > 0) addPoints(numClearedRows * numClearedRows * 10 + Math.ceil(bonusPoints));
+    if(numClearedRows > 0) {
+        totalClearedRows += numClearedRows;
+        updateLevel();
+        addPoints(pointSystem[numClearedRows-1]);
+    }
 }
 
 function addPoints(amount) {
-    points += amount;
+    points += amount * level;
 
     if(points > highScore) setHighScore(points);
 }
@@ -371,8 +381,6 @@ function createNewShape(id = nextShapeId) {
     shape.tiles = shapes[shapeId];
     shape.id = shapeId;
 
-    updateFrameTime();
-
     let leftDst = 0;
     let rightDst = 0;
     shape.tiles.forEach(tile => {
@@ -388,10 +396,6 @@ function createNewShape(id = nextShapeId) {
     }
     
     drawShape(shape.tiles, shape.position, shape.id);
-}
-
-function updateFrameTime() {
-    targetFrameTime = 700 - Math.min(Math.log(points * points + 1) * 20, 100);
 }
 
 function shuffleShapes() {
@@ -418,6 +422,10 @@ function displayPoints() {
     pointDisplay.innerHTML = `Points:<br><span class="variable-text">${points}</span>`;
 }
 
+function displayLevels() {
+    levelDisplay.innerHTML = `Level:<br><span class="variable-text">${level}</span>`;
+}
+
 function start() {
     if(gameMode <= 0) {
         createBoard();
@@ -431,6 +439,8 @@ function start() {
         newShape();
 
         points = 0;
+        level = 1;
+        totalClearedRows = 0;
         startDisplay.classList.add("fast-load");
     }
 
@@ -570,6 +580,7 @@ function load() {
     gameMode = -1
     changeDisplay()
     displayPoints()
+    displayLevels()
     displayHighScore()
     updateTime(0)
     setTimeout(() => loadingScreen.remove(), waitTime);
