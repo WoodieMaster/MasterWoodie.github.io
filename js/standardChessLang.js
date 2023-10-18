@@ -17,7 +17,7 @@ const fileUploadContainer = document.getElementById("file-upload");
 const fileInputElement = document.getElementById("code-file");
 
 const LAG_TIME = 15;
-const LOCAL_STORAGE_CODE_ID = "shortOCode";
+const LOCAL_STORAGE_CODE_ID = "standardChess";
 const TAPE_LENGTH = 30_000;
 const MAX_NUMBER = 256;
 
