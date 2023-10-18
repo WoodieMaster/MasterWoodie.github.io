@@ -69,7 +69,7 @@ const shapes = [
 const shapeOrder = [...shapes.map((el, idx) => idx)];
 const shape = {id: 2, tiles: [[0,0]], position:[0,0]};
 const pointSystem = [20, 50, 150, 600];
-const rowsPerLevel = 1;
+const rowsPerLevel = 10;
 
 let gameMode = 0;
 let startTime;
