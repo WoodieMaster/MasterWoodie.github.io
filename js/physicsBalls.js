@@ -301,7 +301,7 @@ document.addEventListener("mousedown", e => {
         Math.ceil(Math.random() * 255),
         Math.ceil(Math.random() * 255)
     ]
-    circle = new Circle(new Vector2(mousePos.x, mousePos.y), 20, `rgb(${color[0]},${color[1]},${color[2]})`);
+    circle = new Circle(new Vector2(mousePos.x, mousePos.y), 20, `rgb(${color[0]},${color[1]},${color[2]})`, `black`);
     circle.isStatic = true;
 
     selectedObject = circle
